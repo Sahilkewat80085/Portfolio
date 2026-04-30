@@ -57,13 +57,13 @@ export type PortfolioHero = {
 };
 
 export const profile: PortfolioProfile = {
-  fullName: "Your Name",
+  fullName: "Sahil Kewat",
   headline: "Developer, builder, and problem solver.",
   shortBio:
     "This portfolio now runs without Sanity. We can replace this with your real intro next.",
-  location: "your city",
-  email: "you@example.com",
-  resumeUrl: "#",
+  location: "India",
+  email: "kkewat315@gmail.com",
+  resumeUrl: "/sahil_kewat_resume.pdf",
   about: [
     "I build clean, useful digital products and enjoy turning ideas into polished web experiences.",
     "This template has been converted into a regular Next.js portfolio so your content now lives directly in the project.",

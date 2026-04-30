@@ -1,10 +1,11 @@
 import Image from "next/image";
 import { Metadata } from "next";
-import { BiEnvelope, BiLinkExternal, BiSolidDownload } from "react-icons/bi";
+import { BiLinkExternal, BiSolidDownload } from "react-icons/bi";
 import Heroes from "../components/pages/Heroes";
 import Usage from "../components/pages/Usage";
 import { Slide } from "../animation/Slide";
 import RefLink from "../components/shared/RefLink";
+import EmailCopyLink from "../components/shared/EmailCopyLink";
 import { profile } from "../data/portfolio";
 
 export const metadata: Metadata = {
@@ -67,6 +68,8 @@ export default async function About() {
                     </RefLink>
                     <a
                       href={profile.resumeUrl}
+                      target="_blank"
+                      rel="noreferrer noopener"
                       className="flex items-center justify-center text-center dark:text-primary-color text-secondary-color hover:underline basis-[10%] dark:bg-primary-bg bg-zinc-100 border border-transparent dark:hover:border-zinc-700 hover:border-zinc-200 rounded-md py-3 text-lg"
                       title="Download Resume"
                     >
@@ -77,13 +80,7 @@ export default async function About() {
                     </a>
                   </div>
 
-                  <a
-                    href={`mailto:${profile.email}`}
-                    className="flex items-center gap-x-2 hover:text-primary-color"
-                  >
-                    <BiEnvelope className="text-lg" />
-                    {profile.email}
-                  </a>
+                  <EmailCopyLink email={profile.email} />
                 </div>
               </div>
             </Slide>
