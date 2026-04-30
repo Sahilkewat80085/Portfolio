@@ -7,13 +7,13 @@ import PageHeading from "../components/shared/PageHeading";
 import { projects } from "../data/portfolio";
 
 export const metadata: Metadata = {
-  title: "Project | Victor Eke",
-  metadataBase: new URL("https://victoreke.com/projects"),
-  description: "Explore projects built by Victor Eke",
+  title: "Projects | Sahil Kewat",
+  metadataBase: new URL("https://sahilkewat.dev/projects"),
+  description: "Explore projects built by Sahil Kewat",
   openGraph: {
-    title: "Projects | Victor Eke",
-    url: "https://victoreke.com/projects",
-    description: "Explore projects built by Victor Eke",
+    title: "Projects | Sahil Kewat",
+    url: "https://sahilkewat.dev/projects",
+    description: "Explore projects built by Sahil Kewat",
     images:
       "https://res.cloudinary.com/victoreke/image/upload/v1692636087/victoreke/projects.png",
   },

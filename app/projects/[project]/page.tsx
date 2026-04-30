@@ -23,11 +23,11 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 
   return {
     title: `${project.name} | Project`,
-    metadataBase: new URL(`https://victoreke.com/projects/${project.slug}`),
+    metadataBase: new URL(`https://sahilkewat.dev/projects/${project.slug}`),
     description: project.tagline,
     openGraph: {
       images: project.coverImage || fallbackImage,
-      url: `https://victoreke.com/projects/${project.slug}`,
+      url: `https://sahilkewat.dev/projects/${project.slug}`,
       title: project.name,
       description: project.tagline,
     },

@@ -32,20 +32,20 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 
   return {
     title: post.title,
-    metadataBase: new URL(`https://victoreke.com/blog/${post.slug}`),
+    metadataBase: new URL(`https://sahilkewat.dev/blog/${post.slug}`),
     description: post.description,
     publisher: post.author.name,
     keywords: post.tags,
     alternates: {
-      canonical: `https://victoreke.com/blog/${post.slug}`,
+      canonical: `https://sahilkewat.dev/blog/${post.slug}`,
     },
     openGraph: {
       images: post.coverImage || fallbackImage,
-      url: `https://victoreke.com/blog/${post.slug}`,
+      url: `https://sahilkewat.dev/blog/${post.slug}`,
       title: post.title,
       description: post.description,
       type: "article",
-      siteName: "victoreke.com",
+      siteName: "Sahil Kewat Portfolio",
       authors: post.author.name,
       tags: post.tags,
       publishedTime: post.date,

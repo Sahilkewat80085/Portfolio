@@ -8,13 +8,13 @@ import RefLink from "../components/shared/RefLink";
 import { profile } from "../data/portfolio";
 
 export const metadata: Metadata = {
-  title: "About | Victor Eke",
-  metadataBase: new URL("https://victoreke.com/about"),
+  title: "About | Sahil Kewat",
+  metadataBase: new URL("https://sahilkewat.dev/about"),
   description:
     "Learn more about my skills, experience and technical background",
   openGraph: {
-    title: "About | Victor Eke",
-    url: "https://victoreke.com/about",
+    title: "About | Sahil Kewat",
+    url: "https://sahilkewat.dev/about",
     description:
       "Learn more about my skills, experience and technical background",
     images:
