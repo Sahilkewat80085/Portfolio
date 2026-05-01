@@ -59,17 +59,17 @@ async function fetchGithubActivity(start: Date, end: Date) {
   }
 
   const svg = await response.text();
-  const rectRegex = /<rect\b[^>]*data-date="(\d{4}-\d{2}-\d{2})"[^>]*>/g;
-  const countRegex = /data-count="(\d+)"/;
+  const dayRegex =
+    /data-date="(\d{4}-\d{2}-\d{2})"[\s\S]*?<tool-tip[\s\S]*?>([^<]*)<\/tool-tip>/g;
   const activity = new Map<string, number>();
   let match: RegExpExecArray | null;
 
-  while ((match = rectRegex.exec(svg)) !== null) {
-    const raw = match[0];
+  while ((match = dayRegex.exec(svg)) !== null) {
     const date = match[1];
+    const tooltipText = match[2] ?? "";
     if (!date) continue;
 
-    const countMatch = raw.match(countRegex);
+    const countMatch = tooltipText.match(/(\d+)\s+contribution/);
     const count = countMatch ? Number(countMatch[1]) : 0;
     activity.set(date, count);
   }
