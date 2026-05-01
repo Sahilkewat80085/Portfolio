@@ -68,7 +68,9 @@ export default function ContributionGraph() {
 
     async function loadActivity() {
       try {
-        const response = await fetch("/api/activity");
+        const response = await fetch("/api/activity", {
+          cache: "no-store",
+        });
         const payload = (await response.json()) as ActivityPayload;
 
         if (isMounted) {
