@@ -66,13 +66,36 @@ export const profile: PortfolioProfile = {
 export const jobs: PortfolioJob[] = [
   {
     id: "job-1",
-    name: "Your Company",
-    jobTitle: "Your Role",
-    url: "https://example.com",
+    name: "Tata via Forage",
+    jobTitle: "GenAI Powered Data Analytics",
+    url: "https://www.theforage.com/",
     logo: "/logo.png",
     description:
-      "Add your real work experience here. We can replace this with your internship, freelance, or full-time role.",
-    startDate: "2024-01-01",
+      "Completed a virtual internship focusing on leveraging Generative AI for data analytics and visualization to drive business insights.",
+    startDate: "2026-04-01",
+    endDate: "2026-05-31",
+  },
+  {
+    id: "job-2",
+    name: "Team Abhyuday Racing",
+    jobTitle: "Team Manager",
+    url: "#",
+    logo: "/logo.png",
+    description:
+      "Led the team through various racing competitions, overseeing logistics, team coordination, and strategic planning.",
+    startDate: "2025-07-01",
+    endDate: "2025-10-31",
+  },
+  {
+    id: "job-3",
+    name: "Team Abhyuday Racing",
+    jobTitle: "Software Integration Head",
+    url: "#",
+    logo: "/logo.png",
+    description:
+      "Managed the integration of software systems for the racing vehicle, ensuring seamless communication between sensors and control units.",
+    startDate: "2025-01-01",
+    endDate: "2025-07-31",
   },
 ];
 
