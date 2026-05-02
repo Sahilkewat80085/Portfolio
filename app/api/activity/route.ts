@@ -36,8 +36,9 @@ function formatDate(date: Date) {
 }
 
 function getDateRange() {
-  const end = startOfUtcDay(new Date());
-  const start = new Date(Date.UTC(2026, 0, 1));
+  const currentYear = new Date().getUTCFullYear();
+  const start = new Date(Date.UTC(currentYear, 0, 1));
+  const end = new Date(Date.UTC(currentYear, 11, 31));
 
   return { start, end };
 }

@@ -120,14 +120,14 @@ export default function ContributionGraph() {
   });
 
   return (
-    <div className="dark:bg-primary-bg bg-secondary-bg border dark:border-zinc-800 border-zinc-200 p-6 rounded-lg w-full">
-      <div className="w-full">
+    <div className="dark:bg-primary-bg bg-secondary-bg border dark:border-zinc-800 border-zinc-200 p-6 rounded-lg w-full overflow-x-auto">
+      <div className="min-w-[760px]">
         {loading ? (
-          <div className="grid grid-cols-[repeat(18,minmax(0,1fr))] gap-2">
-            {Array.from({ length: 126 }).map((_, index) => (
+          <div className="grid grid-cols-[repeat(53,minmax(0,1fr))] gap-2">
+            {Array.from({ length: 371 }).map((_, index) => (
               <div
                 key={index}
-                className="aspect-square rounded-sm bg-zinc-200 dark:bg-zinc-800 animate-pulse"
+                className="w-3 h-3 rounded-sm bg-zinc-200 dark:bg-zinc-800 animate-pulse"
               />
             ))}
           </div>
@@ -161,7 +161,7 @@ export default function ContributionGraph() {
                     day ? (
                       <div
                         key={day.date}
-                        className={`aspect-square min-h-[10px] rounded-[3px] transition-colors ${getCellClass(
+                        className={`w-3 h-3 rounded-[3px] transition-colors ${getCellClass(
                           day.total,
                           summary?.maxDayCount ?? 0
                         )}`}
@@ -170,7 +170,7 @@ export default function ContributionGraph() {
                     ) : (
                       <div
                         key={`empty-${weekIndex}-${dayIndex}`}
-                        className="aspect-square min-h-[10px]"
+                        className="w-3 h-3"
                       />
                     )
                   )}
