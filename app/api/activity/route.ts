@@ -1,5 +1,7 @@
 import { NextResponse } from "next/server";
 
+export const dynamic = "force-dynamic";
+
 const GITHUB_USERNAME =
   process.env.NEXT_PUBLIC_GITHUB_USERNAME ?? "Sahilkewat80085";
 const LEETCODE_USERNAME = "Sahilkewat8090";
@@ -48,7 +50,7 @@ async function fetchGithubActivity(start: Date, end: Date) {
     start
   )}&to=${formatDate(end)}`;
   const response = await fetch(url, {
-    next: { revalidate: 21600 },
+    cache: "no-store",
     headers: {
       "User-Agent": "portfolio-activity-fetcher",
     },
@@ -100,7 +102,7 @@ async function fetchLeetcodeActivity() {
       query,
       variables: { username: LEETCODE_USERNAME },
     }),
-    next: { revalidate: 21600 },
+    cache: "no-store",
   });
 
   if (!response.ok) {
@@ -194,9 +196,5 @@ export async function GET() {
     warnings,
   };
 
-  return NextResponse.json(payload, {
-    headers: {
-      "Cache-Control": "s-maxage=21600, stale-while-revalidate=86400",
-    },
-  });
+  return NextResponse.json(payload);
 }

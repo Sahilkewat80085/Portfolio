@@ -31,7 +31,7 @@ export default async function Job() {
                 >
                   <Image
                     src={job.logo}
-                    className="object-cover duration-300"
+                    className="object-contain duration-300"
                     alt={`${job.name} logo`}
                     width={50}
                     height={50}

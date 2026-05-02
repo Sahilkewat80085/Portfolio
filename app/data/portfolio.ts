@@ -69,7 +69,7 @@ export const jobs: PortfolioJob[] = [
     name: "Tata via Forage",
     jobTitle: "GenAI Powered Data Analytics",
     url: "https://www.theforage.com/",
-    logo: "/logo.png",
+    logo: "/tata_logo.jpg",
     description:
       "Completed a virtual internship focusing on leveraging Generative AI for data analytics and visualization to drive business insights.",
     startDate: "2026-04-01",
@@ -80,9 +80,9 @@ export const jobs: PortfolioJob[] = [
     name: "Team Abhyuday Racing",
     jobTitle: "Team Manager",
     url: "#",
-    logo: "/logo.png",
+    logo: "/Abhyuday_logo.jpeg",
     description:
-      "Led the team through various racing competitions, overseeing logistics, team coordination, and strategic planning.",
+      "Led the team through aBAJA 2025, overseeing Integration of all sub systems, team coordination, and strategic planning.",
     startDate: "2025-07-01",
     endDate: "2025-10-31",
   },
@@ -91,9 +91,9 @@ export const jobs: PortfolioJob[] = [
     name: "Team Abhyuday Racing",
     jobTitle: "Software Integration Head",
     url: "#",
-    logo: "/logo.png",
+    logo: "/Abhyuday_logo.jpeg",
     description:
-      "Managed the integration of software systems for the racing vehicle, ensuring seamless communication between sensors and control units.",
+      "Managed the integration of software systems for the autonomous vehicle, ensuring seamless communication between sensors and control units.",
     startDate: "2025-01-01",
     endDate: "2025-07-31",
   },
