@@ -9,7 +9,7 @@ export default function NotFound() {
   return (
     <NotFoundComponent
       title="Error 404!"
-      description="Oopsies! This page does not exist on Sahil Kewat's portfolio. While you're here, you can read some featured posts below."
+      description="Oopsies! This page does not exist on Sahil Kewat's portfolio. Kindly go back home."
     />
   );
 }

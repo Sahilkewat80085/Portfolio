@@ -32,22 +32,7 @@ export type PortfolioProject = {
   description: string[];
 };
 
-export type PortfolioPost = {
-  id: string;
-  slug: string;
-  title: string;
-  description: string;
-  date: string;
-  coverImage: string;
-  tags: string[];
-  featured: boolean;
-  author: {
-    name: string;
-    photo: string;
-    twitterUrl: string;
-  };
-  body: string[];
-};
+
 
 export type PortfolioHero = {
   id: string;
@@ -109,28 +94,7 @@ export const projects: PortfolioProject[] = [
   },
 ];
 
-export const posts: PortfolioPost[] = [
-  {
-    id: "post-1",
-    slug: "welcome",
-    title: "Welcome to My Portfolio",
-    description: "A quick note about rebuilding this template into something personal.",
-    date: "2026-04-30",
-    coverImage: "/site.png",
-    tags: ["portfolio", "nextjs", "personal-brand"],
-    featured: true,
-    author: {
-      name: "Sahil",
-      photo: "/logo.png",
-      twitterUrl: "https://twitter.com/yourhandle",
-    },
-    body: [
-      "This blog section is now powered by local project data instead of Sanity.",
-      "That means we can customize everything directly in the codebase without fighting the Studio setup first.",
-      "Once the structure feels right, we can add your real writing or remove the blog entirely if you do not want one.",
-    ],
-  },
-];
+
 
 export const heroes: PortfolioHero[] = [
   {

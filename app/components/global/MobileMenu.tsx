@@ -3,12 +3,17 @@ import Link from "next/link";
 import Image from "next/image";
 import { useState } from "react";
 import { RxHamburgerMenu } from "react-icons/rx";
-import { HiBeaker, HiBookmarkAlt, HiOutlineX, HiUser } from "react-icons/hi";
+import { HiBeaker, HiBookmarkAlt, HiOutlineX, HiUser, HiHome } from "react-icons/hi";
 import Logo from "../../../public/logo.png";
 
 export default function MobileMenu() {
   const [navShow, setNavShow] = useState(false);
   const data = [
+    {
+      title: "Home",
+      href: "/",
+      icon: HiHome,
+    },
     {
       title: "About",
       href: "/about",
@@ -18,11 +23,6 @@ export default function MobileMenu() {
       title: "Projects",
       href: "/projects",
       icon: HiBeaker,
-    },
-    {
-      title: "Blog",
-      href: "/blog",
-      icon: HiBookmarkAlt,
     },
     {
       title: "Contact",
