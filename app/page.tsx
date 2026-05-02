@@ -1,3 +1,4 @@
+import Image from "next/image";
 import HeroSvg from "./assets/icons/HeroSvg";
 import Job from "./components/pages/Job";
 import Social from "./components/shared/Social";
@@ -23,7 +24,14 @@ export default async function Home() {
           </Slide>
         </div>
         <Slide delay={0.14}>
-          <HeroSvg />
+          <Image
+            src="/site.png"
+            width={400}
+            height={400}
+            alt={profile.fullName}
+            className="rounded-2xl object-cover"
+            priority
+          />
         </Slide>
       </section>
       <ContributionGraph />

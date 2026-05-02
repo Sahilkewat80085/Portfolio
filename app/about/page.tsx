@@ -1,4 +1,5 @@
 import Image from "next/image";
+import HeroSvg from "../assets/icons/HeroSvg";
 import { Metadata } from "next";
 import { BiLinkExternal, BiSolidDownload } from "react-icons/bi";
 import Heroes from "../components/pages/Heroes";
@@ -47,15 +48,7 @@ export default async function About() {
           <aside className="flex flex-col lg:justify-self-center justify-self-start gap-y-8 lg:order-1 order-none mb-12">
             <Slide delay={0.1}>
               <div className="sticky top-10">
-                <Image
-                  className="rounded-2xl mb-4 object-cover max-h-96 min-h-96 bg-top"
-                  src="/site.png"
-                  width={400}
-                  height={400}
-                  quality={100}
-                  alt={profile.fullName}
-                  priority
-                />
+                <HeroSvg />
 
                 <div className="flex flex-col text-center gap-y-4">
                   <div className="flex items-center gap-x-3">
