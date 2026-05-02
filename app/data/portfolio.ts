@@ -60,7 +60,7 @@ export const profile: PortfolioProfile = {
   fullName: "Sahil Kewat",
   headline: "Developer, builder, and problem solver.",
   shortBio:
-    "This portfolio now runs without Sanity. We can replace this with your real intro next.",
+    "I’m Sahil Kewat, a software developer passionate about building scalable applications and intelligent systems. I enjoy turning ideas into working products—and learning something new every time the code doesn’t cooperate.",
   location: "India",
   email: "kkewat315@gmail.com",
   resumeUrl: "/sahil_kewat_resume.pdf",
@@ -99,7 +99,7 @@ export const projects: PortfolioProject[] = [
     tagline: "A personalized developer portfolio built from a cloned template.",
     projectUrl: "https://example.com",
     repository: "https://github.com/Sahilkewat80085/portfolio",
-    logo: "/logo.svg",
+    logo: "/logo.png",
     coverImage: "/project.png",
     description: [
       "This project is the starting point for your personal portfolio.",
