@@ -46,7 +46,7 @@ export default function Footer() {
 
         <div className="flex flex-col lg:items-end items-center lg:text-start text-center">
           <small className="text-zinc-500">
-            Copyright &copy; Your Name {new Date().getFullYear()} All rights
+            Copyright &copy; Sahil {new Date().getFullYear()} All rights
             reserved
           </small>
         </div>

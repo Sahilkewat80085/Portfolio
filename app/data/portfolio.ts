@@ -98,7 +98,7 @@ export const projects: PortfolioProject[] = [
     name: "Portfolio Template",
     tagline: "A personalized developer portfolio built from a cloned template.",
     projectUrl: "https://example.com",
-    repository: "https://github.com/yourname/portfolio",
+    repository: "https://github.com/Sahilkewat80085/portfolio",
     logo: "/logo.svg",
     coverImage: "/project.png",
     description: [
@@ -120,7 +120,7 @@ export const posts: PortfolioPost[] = [
     tags: ["portfolio", "nextjs", "personal-brand"],
     featured: true,
     author: {
-      name: "Your Name",
+      name: "Sahil",
       photo: "/logo.png",
       twitterUrl: "https://twitter.com/yourhandle",
     },
