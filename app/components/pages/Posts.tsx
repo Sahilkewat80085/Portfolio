@@ -8,7 +8,7 @@ import { readTime } from "@/app/utils/readTime";
 import { posts } from "@/app/data/portfolio";
 
 const fallbackImage =
-  "https://res.cloudinary.com/victoreke/image/upload/v1692608339/victoreke/blog.png";
+  "/logo.png";
 
 export default async function Posts() {
   return (

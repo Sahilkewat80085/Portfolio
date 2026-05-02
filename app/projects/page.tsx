@@ -15,7 +15,7 @@ export const metadata: Metadata = {
     url: "https://sahilkewat.dev/projects",
     description: "Explore projects built by Sahil Kewat",
     images:
-      "https://res.cloudinary.com/victoreke/image/upload/v1692636087/victoreke/projects.png",
+      "/logo.png",
   },
 };
 

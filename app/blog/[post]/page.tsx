@@ -20,8 +20,7 @@ type Props = {
   };
 };
 
-const fallbackImage =
-  "https://res.cloudinary.com/victoreke/image/upload/v1692636087/victoreke/blog.png";
+const fallbackImage = "/logo.png";
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const post = posts.find((item) => item.slug === params.post);

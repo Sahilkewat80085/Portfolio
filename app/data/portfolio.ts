@@ -65,9 +65,9 @@ export const profile: PortfolioProfile = {
   email: "kkewat315@gmail.com",
   resumeUrl: "/sahil_kewat_resume.pdf",
   about: [
-    "I build clean, useful digital products and enjoy turning ideas into polished web experiences.",
-    "This template has been converted into a regular Next.js portfolio so your content now lives directly in the project.",
-    "Next, we can replace every placeholder here with your real background, achievements, and projects.",
+    "I am a self-driven software developer specializing in full-stack development, machine learning, and intelligent systems, currently pursuing a Bachelor’s degree in Information Technology. I focus on building scalable applications and data-driven systems using Python, JavaScript, and modern ML frameworks.",
+    "I believe in continuous learning and actively challenge myself through hands-on projects, including ML pipelines, NLP systems, and agentic AI solutions.",
+    "Beyond learning, I enjoy building impactful projects that solve real-world problems and push the boundaries of practical AI and system design.",
   ],
   usage: [
     "Next.js and React for frontend work",

@@ -17,8 +17,7 @@ const options = {
   description:
     "Sahil Kewat is a Software Developer who is passionate about building useful digital experiences.",
   url: "https://github.com/Sahilkewat80085/Portfolio",
-  ogImage:
-    "https://res.cloudinary.com/victoreke/image/upload/v1692635746/victoreke/og.png",
+  ogImage: "/logo.png",
 };
 
 export const metadata: Metadata = {

@@ -27,7 +27,7 @@ export const metadata: Metadata = {
     url: "https://sahilkewat.dev/photos",
     description: "Explore photos curated by Sahil Kewat",
     images:
-      "https://res.cloudinary.com/victoreke/image/upload/v1692635149/victoreke/photos.png",
+      "/logo.png",
   },
 };
 

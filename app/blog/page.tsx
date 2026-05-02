@@ -14,7 +14,7 @@ export const metadata: Metadata = {
     url: "https://sahilkewat.dev/blog",
     description: "Read latest stories from Sahil Kewat's blog",
     images:
-      "https://res.cloudinary.com/victoreke/image/upload/v1692636087/victoreke/blog.png",
+      "/logo.png",
   },
 };
 
