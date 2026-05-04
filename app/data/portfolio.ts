@@ -7,7 +7,6 @@ export type PortfolioProfile = {
   resumeUrl: string;
   about: string[];
   usage: string[];
-  fullBio: string;
 };
 
 export type PortfolioJob = {
@@ -55,8 +54,6 @@ export const profile: PortfolioProfile = {
     "I believe in continuous learning and actively challenge myself through hands-on projects, including ML pipelines, NLP systems, and agentic AI solutions.",
     "Beyond learning, I enjoy building impactful projects that solve real-world problems and push the boundaries of practical AI and system design.",
   ],
-  fullBio:
-    "If you ever spot me in the wild, don't hesitate to say hello! Let's grab a drink and geek-out over the latest advancements in front-end development or discuss our favorite programming language.",
   usage: [
     "Next.js and React for frontend work",
     "TypeScript for safer app development",

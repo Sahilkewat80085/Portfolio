@@ -2,8 +2,6 @@ import Image from "next/image";
 import HeroSvg from "../assets/icons/HeroSvg";
 import { Metadata } from "next";
 import { BiLinkExternal, BiSolidDownload } from "react-icons/bi";
-import { FaQuoteRight } from "react-icons/fa";
-import { HiLightningBolt } from "react-icons/hi";
 import Heroes from "../components/pages/Heroes";
 import Usage from "../components/pages/Usage";
 import { Slide } from "../animation/Slide";
@@ -43,14 +41,6 @@ export default async function About() {
                     {paragraph}
                   </p>
                 ))}
-
-                <div className="flex flex-col gap-y-4 w-full relative border dark:border-zinc-800 border-zinc-200 dark:bg-primary-bg bg-zinc-50 p-6 rounded-2xl mt-12 overflow-hidden">
-                  <FaQuoteRight className="absolute -top-6 -right-2 text-8xl dark:text-zinc-800 text-zinc-100 -z-10" />
-                  <p className="dark:text-zinc-300 text-zinc-700 leading-relaxed font-incognito text-lg">
-                    {profile.fullBio}
-                  </p>
-                  <HiLightningBolt className="text-orange-400 text-2xl" />
-                </div>
               </div>
             </Slide>
           </div>
@@ -64,7 +54,7 @@ export default async function About() {
                   <div className="flex items-center gap-x-3">
                     <RefLink
                       href={profile.resumeUrl}
-                      className="flex items-center justify-center text-center gap-x-2 basis-[90%] dark:bg-primary-bg bg-zinc-100 border border-transparent dark:hover:border-zinc-700 hover:border-zinc-200 rounded-md py-2 text-lg font-incognito font-semibold"
+                      className="flex items-center justify-center text-center gap-x-2 basis-[90%] dark:bg-primary-bg bg-zinc-100 border border-transparent dark:hover:border-zinc-700 hover:border-zinc-200 rounded-md py-2 text-base font-incognito font-semibold"
                     >
                       View Resume <BiLinkExternal className="text-base" />
                     </RefLink>
@@ -72,7 +62,7 @@ export default async function About() {
                       href={profile.resumeUrl}
                       target="_blank"
                       rel="noreferrer noopener"
-                      className="flex items-center justify-center text-center dark:text-primary-color text-secondary-color hover:underline basis-[10%] dark:bg-primary-bg bg-zinc-100 border border-transparent dark:hover:border-zinc-700 hover:border-zinc-200 rounded-md py-3 text-lg"
+                      className="flex items-center justify-center text-center dark:text-primary-color text-secondary-color hover:underline basis-[10%] dark:bg-primary-bg bg-zinc-100 border border-transparent dark:hover:border-zinc-700 hover:border-zinc-200 rounded-md py-2 text-base"
                       title="Download Resume"
                     >
                       <BiSolidDownload

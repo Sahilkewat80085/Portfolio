@@ -14,7 +14,7 @@ export default async function Usage() {
         {profile.usage.map((item) => (
           <li
             key={item}
-            className="dark:bg-primary-bg bg-zinc-100 border dark:border-zinc-800 border-zinc-200 rounded-md px-4 py-3"
+            className="dark:bg-primary-bg bg-zinc-100 border dark:border-zinc-800 border-zinc-200 rounded-md px-4 py-2"
           >
             {item}
           </li>
