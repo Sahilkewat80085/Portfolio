@@ -1,5 +1,11 @@
-import { BiEnvelope, BiLogoGithub, BiLogoLinkedinSquare } from "react-icons/bi";
+import {
+  BiEnvelope,
+  BiLogoGithub,
+  BiLogoLinkedinSquare,
+  BiFileBlank,
+} from "react-icons/bi";
 import { FaSquareXTwitter } from "react-icons/fa6";
+import { HiOutlineDocumentText } from "react-icons/hi2";
 
 export const socialLinks = [
   {
@@ -32,6 +38,13 @@ export const socialLinks = [
   },
   {
     id: 5,
+    name: "Resume",
+    url: "/sahil_kewat_resume.pdf",
+    icon: HiOutlineDocumentText,
+    status: "social",
+  },
+  {
+    id: 6,
     name: "Medium",
     url: "https://medium.com/@yourhandle",
     icon: BiLogoGithub,
