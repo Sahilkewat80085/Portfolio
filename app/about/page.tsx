@@ -2,6 +2,8 @@ import Image from "next/image";
 import HeroSvg from "../assets/icons/HeroSvg";
 import { Metadata } from "next";
 import { BiLinkExternal, BiSolidDownload } from "react-icons/bi";
+import { FaQuoteRight } from "react-icons/fa";
+import { HiLightningBolt } from "react-icons/hi";
 import Heroes from "../components/pages/Heroes";
 import Usage from "../components/pages/Usage";
 import { Slide } from "../animation/Slide";
@@ -41,6 +43,14 @@ export default async function About() {
                     {paragraph}
                   </p>
                 ))}
+
+                <div className="flex flex-col gap-y-4 w-full relative border dark:border-zinc-800 border-zinc-200 dark:bg-primary-bg bg-zinc-50 p-6 rounded-2xl mt-12 overflow-hidden">
+                  <FaQuoteRight className="absolute -top-6 -right-2 text-8xl dark:text-zinc-800 text-zinc-100 -z-10" />
+                  <p className="dark:text-zinc-300 text-zinc-700 leading-relaxed font-incognito text-lg">
+                    {profile.fullBio}
+                  </p>
+                  <HiLightningBolt className="text-orange-400 text-2xl" />
+                </div>
               </div>
             </Slide>
           </div>
