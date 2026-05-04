@@ -30,6 +30,8 @@ export type PortfolioProject = {
   logo: string;
   coverImage: string;
   description: string[];
+  techStack: string[];
+  screenshots: string[];
 };
 
 
@@ -43,7 +45,7 @@ export type PortfolioHero = {
 
 export const profile: PortfolioProfile = {
   fullName: "Sahil Kewat",
-  headline: "I'm Sahil Kewat. I live in India, where I build useful things..",
+  headline: "I'm Sahil Kewat. I live in India, where I build useful things.",
   shortBio:
     "I’m Sahil Kewat, a software developer passionate about building scalable applications and intelligent systems. I enjoy turning ideas into working products—and learning something new every time the code doesn’t cooperate.",
   location: "India",
@@ -102,18 +104,26 @@ export const jobs: PortfolioJob[] = [
 export const projects: PortfolioProject[] = [
   {
     id: "project-1",
-    slug: "portfolio-template",
-    name: "Portfolio Template",
-    tagline: "A personalized developer portfolio built from a cloned template.",
-    projectUrl: "https://example.com",
-    repository: "https://github.com/Sahilkewat80085/portfolio",
+    slug: "cottonx",
+    name: "CottonX",
+    tagline: "Autonomous Agent Infrastructure",
+    projectUrl: "",
+    repository: "https://github.com/Reality373/CottonX",
     logo: "/logo.png",
-    coverImage: "/project.png",
+    coverImage: "/projects/cottonx/ss1.png",
     description: [
-      "This project is the starting point for your personal portfolio.",
-      "We removed the CMS dependency and made the content local so updates are simpler and faster.",
-      "Next, we can replace the copy, links, visuals, and metadata with your own brand.",
+      "CottonX is a robust infrastructure for deploying and managing autonomous AI agents capable of executing secure, reliable onchain operations based on user-defined intents.",
+      "It combines natural language processing with blockchain automation to create intelligent agents that can trade, transfer assets, rebalance portfolios, and participate in governance.",
     ],
+    techStack: [
+      "Node.js",
+      "TypeScript",
+      "Next.js",
+      "Express.js",
+      "HeLa Testnet",
+      "Coinbase CDP",
+    ],
+    screenshots: ["/projects/cottonx/ss1.png", "/projects/cottonx/ss2.png"],
   },
 ];
 
