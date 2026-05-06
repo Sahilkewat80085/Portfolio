@@ -45,7 +45,7 @@ export type PortfolioHero = {
 
 export const profile: PortfolioProfile = {
   fullName: "Sahil Kewat",
-  headline: "I'm Sahil Kewat. I live in India, where I build useful things.",
+  headline: "I'm Sahil Kewat. I live in India, where I build intelligent systems and scalable applications.",
   shortBio:
     "I’m Sahil Kewat, a software developer passionate about building scalable applications and intelligent systems. I enjoy turning ideas into working products and learning something new every time the code doesn’t cooperate.",
   location: "India",
