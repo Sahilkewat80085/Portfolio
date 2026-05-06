@@ -5,6 +5,7 @@ import Social from "./components/shared/Social";
 import { Slide } from "./animation/Slide";
 import ContributionGraph from "./components/pages/GithubCalendarComponent";
 import { profile } from "./data/portfolio";
+import ImageCarousel from "./components/shared/ImageCarousel";
 
 export default async function Home() {
   return (
@@ -24,14 +25,7 @@ export default async function Home() {
           </Slide>
         </div>
         <Slide delay={0.14}>
-          <Image
-            src="/site.png"
-            width={400}
-            height={400}
-            alt={profile.fullName}
-            className="rounded-2xl object-cover"
-            priority
-          />
+          <ImageCarousel />
         </Slide>
       </section>
       <ContributionGraph />
