@@ -72,6 +72,12 @@ export const profile: PortfolioProfile = {
     { name: "Firestore", description: "NoSQL cloud database", logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/firebase/firebase-plain.svg" },
     { name: "Cassandra DB", description: "Distributed database", logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/apachecassandra/apachecassandra-original.svg" },
     { name: "SQL Databases", description: "Relational databases", logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/postgresql/postgresql-original.svg" },
+    { name: "Spotify", description: "Music & Podcasts", logo: "https://www.google.com/s2/favicons?domain=spotify.com&sz=64" },
+    { name: "ChatGPT", description: "AI Assistant", logo: "https://www.google.com/s2/favicons?domain=openai.com&sz=64" },
+    { name: "Claude", description: "AI Assistant", logo: "https://www.google.com/s2/favicons?domain=anthropic.com&sz=64" },
+    { name: "Gemini", description: "AI Assistant", logo: "https://www.google.com/s2/favicons?domain=google.com&sz=64" },
+    { name: "Microsoft Edge", description: "Browser", logo: "https://www.google.com/s2/favicons?domain=microsoft.com&sz=64" },
+    { name: "Antigravity", description: "AI Coding Assistant", logo: "/noise.png" },
   ],
 };
 
