@@ -49,7 +49,7 @@ export default function ProjectList({ projects }: Props) {
             </div>
             
             <div className="flex flex-wrap gap-2 mt-2">
-              {project.techStack.map((tech) => (
+              {project.techStack.slice(0, 6).map((tech) => (
                 <span
                   key={tech}
                   className="text-[10px] uppercase tracking-widest dark:bg-zinc-800 bg-zinc-200 dark:text-zinc-400 text-zinc-600 px-2 py-1 rounded"

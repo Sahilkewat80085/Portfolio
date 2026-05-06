@@ -13,6 +13,13 @@ type Props = {
 
 const fallbackImage = "/logo.png";
 
+export async function generateStaticParams() {
+  return projects.map((project) => ({
+    project: project.slug,
+  }));
+}
+
+
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const project = projects.find((item) => item.slug === params.project);
 

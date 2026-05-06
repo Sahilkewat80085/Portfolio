@@ -173,6 +173,33 @@ export const projects: PortfolioProject[] = [
     ],
     screenshots: ["/projects/escrox/ss1.png", "/projects/escrox/ss2.png"],
   },
+  {
+    id: "project-4",
+    slug: "nyayasetu",
+    name: "NyayaSetu",
+    tagline: "The Whistleblower & Civic Shield Protocol",
+    projectUrl: "",
+    repository: "",
+    logo: "/logo.png",
+    coverImage: "/projects/nyayasetu/ss1.png",
+    description: [
+      "NyayaSetu is a decentralized, end-to-end encrypted platform designed to protect whistleblowers, journalists, and civic informants when reporting corruption or human rights violations.",
+      "By leveraging Blockchain immutability, Zero-Knowledge proofs, and AI-powered Forensic Analysis, it establishes a zero-trust environment where the identity of the reporter is cryptographically shielded.",
+      "The system strips device metadata from evidence and uses Google Gemini 2.5 Flash to verify authenticity, ensuring that the justice system is protected from AI-generated manipulations.",
+    ],
+    techStack: [
+      "Next.js 14",
+      "Solidity",
+      "TypeScript",
+      "TailwindCSS",
+      "Wagmi & Viem",
+      "Web Crypto API",
+      "Google Gemini AI",
+      "IPFS (Pinata)",
+      "Hardhat",
+    ],
+    screenshots: ["/projects/nyayasetu/ss1.png", "/projects/nyayasetu/ss2.png"],
+  },
 ];
 
 
