@@ -5,15 +5,14 @@ import Image from "next/image";
 import { motion, AnimatePresence } from "framer-motion";
 
 const images = [
-  "/images/carousel/carousel-1.jpg",
-  "/images/carousel/carousel-2.jpg",
-  "/images/carousel/carousel-3.jpg",
-  "/images/carousel/carousel-4.jpg",
-  "/images/carousel/carousel-5.jpg",
+  { src: "/images/carousel/carousel-2.jpg", position: "center" },
+  { src: "/images/carousel/carousel-3.jpg", position: "top" },
+  { src: "/images/carousel/carousel-4.jpg", position: "center" },
+  { src: "/images/carousel/carousel-5.jpg", position: "center" },
 ];
 
 export default function ImageCarousel() {
-  const [currentIndex, setCurrentIndex] = useState(4);
+  const [currentIndex, setCurrentIndex] = useState(3);
 
   useEffect(() => {
     const timer = setInterval(() => {
@@ -35,11 +34,12 @@ export default function ImageCarousel() {
           className="absolute inset-0"
         >
           <Image
-            src={images[currentIndex]}
+            src={images[currentIndex].src}
             alt={`Carousel image ${currentIndex + 1}`}
             fill
+            style={{ objectPosition: images[currentIndex].position }}
             className="object-cover"
-            priority={currentIndex === 0}
+            priority={currentIndex === 3}
           />
         </motion.div>
       </AnimatePresence>
