@@ -6,7 +6,7 @@ export type PortfolioProfile = {
   email: string;
   resumeUrl: string;
   about: string[];
-  usage: string[];
+  usage: { name: string; logo: string; description: string }[];
 };
 
 export type PortfolioJob = {
@@ -57,11 +57,21 @@ export const profile: PortfolioProfile = {
     "Beyond learning, I enjoy building impactful projects that solve real-world problems and push the boundaries of practical AI and system design.",
   ],
   usage: [
-    "Next.js and React for frontend work",
-    "TypeScript for safer app development",
-    "Tailwind CSS for styling",
-    "Git and GitHub for version control",
-    "Figma, VS Code, and browser devtools in the daily workflow",
+    { name: "Python", description: "Programming language", logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg" },
+    { name: "C++", description: "Systems programming", logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/cplusplus/cplusplus-original.svg" },
+    { name: "JavaScript", description: "Programming language", logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg" },
+    { name: "SQL", description: "Database querying", logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mysql/mysql-original.svg" },
+    { name: "HTML", description: "Web markup", logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/html5/html5-original.svg" },
+    { name: "CSS", description: "Web styling", logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/css3/css3-original.svg" },
+    { name: "Bash/Shell", description: "Shell scripting", logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/bash/bash-original.svg" },
+    { name: "Git & GitHub", description: "Version control", logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/git/git-original.svg" },
+    { name: "VS Code", description: "Code editor", logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/vscode/vscode-original.svg" },
+    { name: "Linux", description: "Operating system", logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/linux/linux-original.svg" },
+    { name: "Jupyter Notebook", description: "Interactive notebooks", logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/jupyter/jupyter-original.svg" },
+    { name: "Firebase", description: "Realtime Database", logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/firebase/firebase-plain.svg" },
+    { name: "Firestore", description: "NoSQL cloud database", logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/firebase/firebase-plain.svg" },
+    { name: "Cassandra DB", description: "Distributed database", logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/apachecassandra/apachecassandra-original.svg" },
+    { name: "SQL Databases", description: "Relational databases", logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/postgresql/postgresql-original.svg" },
   ],
 };
 
