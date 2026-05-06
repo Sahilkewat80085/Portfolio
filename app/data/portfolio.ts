@@ -85,7 +85,7 @@ export const jobs: PortfolioJob[] = [
   {
     id: "job-1",
     name: "Tata via Forage",
-    jobTitle: "GenAI Powered Data Analytics",
+    jobTitle: "GenAI Powered Data Analyst",
     url: "https://www.theforage.com/",
     logo: "/tata_logo.jpg",
     description:
