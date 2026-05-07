@@ -231,6 +231,30 @@ export const projects: PortfolioProject[] = [
     ],
     screenshots: ["/projects/nyayasetu/ss1.png", "/projects/nyayasetu/ss2.png"],
   },
+  {
+    id: "project-5",
+    slug: "bloodcall",
+    name: "BloodCall",
+    tagline: "Smart Blood Donation & Emergency Assistance Platform",
+    projectUrl: "",
+    repository: "https://github.com/Sahilkewat80085/BloodCall",
+    logo: "/logo.png",
+    coverImage: "/projects/bloodcall/ss1.png",
+    description: [
+      "Developed a real-time blood donation and emergency assistance platform that connects blood donors, hospitals, and blood banks through a centralized system. The platform helps users quickly find compatible blood donors, check blood availability, and send emergency donation requests during critical situations.",
+      "The system was designed to improve coordination between donors and healthcare organizations while reducing the time required to arrange blood during emergencies. Features included donor registration, blood group filtering, hospital/blood bank connectivity, emergency request handling, and real-time database integration.",
+      "Built using Android Studio with Firebase backend integration, the application focused on creating a scalable and user-friendly healthcare support solution with real-time data synchronization and mobile accessibility.",
+    ],
+    techStack: [
+      "Java",
+      "Android Studio",
+      "Firebase",
+      "Gradle",
+      "Real-time Database",
+      "Mobile App Development",
+    ],
+    screenshots: ["/projects/bloodcall/ss1.png", "/projects/bloodcall/ss2.png"],
+  },
 ];
 
 

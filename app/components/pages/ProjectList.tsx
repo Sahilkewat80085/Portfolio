@@ -117,7 +117,11 @@ export default function ProjectList({ projects }: Props) {
                       src={ss}
                       alt={`${selectedProject.name} screenshot ${index + 1}`}
                       fill
-                      className="object-cover"
+                      className={`object-cover ${
+                        selectedProject.slug === "bloodcall" && index === 1
+                          ? "object-[center_10%]"
+                          : "object-center"
+                      }`}
                     />
                   </div>
                 ))}
