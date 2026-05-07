@@ -7,6 +7,7 @@ export type PortfolioProfile = {
   resumeUrl: string;
   about: string[];
   usage: { name: string; logo: string; description: string }[];
+  softSkills: { title: string; description: string }[];
 };
 
 export type PortfolioJob = {
@@ -36,12 +37,7 @@ export type PortfolioProject = {
 
 
 
-export type PortfolioHero = {
-  id: string;
-  name: string;
-  url: string;
-  met: boolean;
-};
+
 
 export const profile: PortfolioProfile = {
   fullName: "Sahil Kewat",
@@ -64,20 +60,39 @@ export const profile: PortfolioProfile = {
     { name: "HTML", description: "Web markup", logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/html5/html5-original.svg" },
     { name: "CSS", description: "Web styling", logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/css3/css3-original.svg" },
     { name: "Bash/Shell", description: "Shell scripting", logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/bash/bash-original.svg" },
-    { name: "Git & GitHub", description: "Version control", logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/git/git-original.svg" },
+    { name: "Git", description: "Version control", logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/git/git-original.svg" },
+    { name: "GitHub", description: "Version control", logo: "https://www.google.com/s2/favicons?domain=github.com&sz=64" },
     { name: "VS Code", description: "Code editor", logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/vscode/vscode-original.svg" },
     { name: "Linux", description: "Operating system", logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/linux/linux-original.svg" },
     { name: "Jupyter Notebook", description: "Interactive notebooks", logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/jupyter/jupyter-original.svg" },
     { name: "Firebase", description: "Realtime Database", logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/firebase/firebase-plain.svg" },
     { name: "Firestore", description: "NoSQL cloud database", logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/firebase/firebase-plain.svg" },
-    { name: "Cassandra DB", description: "Distributed database", logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/apachecassandra/apachecassandra-original.svg" },
+    { name: "Cassandra DB", description: "Distributed database", logo: "/cassandra_logo.png" },
     { name: "SQL Databases", description: "Relational databases", logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/postgresql/postgresql-original.svg" },
     { name: "Spotify", description: "Music & Podcasts", logo: "https://www.google.com/s2/favicons?domain=spotify.com&sz=64" },
     { name: "ChatGPT", description: "AI Assistant", logo: "https://www.google.com/s2/favicons?domain=openai.com&sz=64" },
     { name: "Claude", description: "AI Assistant", logo: "https://www.google.com/s2/favicons?domain=anthropic.com&sz=64" },
     { name: "Gemini", description: "AI Assistant", logo: "https://www.google.com/s2/favicons?domain=google.com&sz=64" },
     { name: "Microsoft Edge", description: "Browser", logo: "https://www.google.com/s2/favicons?domain=microsoft.com&sz=64" },
-    { name: "Antigravity", description: "AI Coding Assistant", logo: "/noise.png" },
+    { name: "Antigravity", description: "AI Coding Assistant", logo: "https://www.google.com/s2/favicons?domain=deepmind.google&sz=64" },
+  ],
+  softSkills: [
+    {
+      title: "Systems Thinking",
+      description: "I enjoy designing scalable and intelligent systems by breaking complex problems into manageable components, with a strong focus on reliability, performance, and real-world usability.",
+    },
+    {
+      title: "Fast Learning & Adaptability",
+      description: "I actively explore emerging technologies like machine learning, agentic AI, blockchain, and autonomous systems, and I quickly adapt to new tools and workflows when solving problems or building projects.",
+    },
+    {
+      title: "Ability to Work Independently",
+      description: "I am comfortable taking ownership of projects and delivering solutions with minimal supervision. I enjoy figuring things out, troubleshooting challenges, and maintaining consistency under tight deadlines.",
+    },
+    {
+      title: "Collaboration & Leadership",
+      description: "Through hackathons and team-based engineering projects, I’ve worked closely with developers, designers, and system teams to build practical solutions and coordinate development effectively.",
+    },
   ],
 };
 
@@ -220,17 +235,4 @@ export const projects: PortfolioProject[] = [
 
 
 
-export const heroes: PortfolioHero[] = [
-  {
-    id: "hero-1",
-    name: "Ada Lovelace",
-    url: "https://en.wikipedia.org/wiki/Ada_Lovelace",
-    met: false,
-  },
-  {
-    id: "hero-2",
-    name: "Guido van Rossum",
-    url: "https://en.wikipedia.org/wiki/Guido_van_Rossum",
-    met: false,
-  },
-];
+

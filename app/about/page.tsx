@@ -2,8 +2,9 @@ import Image from "next/image";
 import HeroSvg from "../assets/icons/HeroSvg";
 import { Metadata } from "next";
 import { BiLinkExternal, BiSolidDownload } from "react-icons/bi";
-import Heroes from "../components/pages/Heroes";
+
 import Usage from "../components/pages/Usage";
+import SoftSkills from "../components/pages/SoftSkills";
 import { Slide } from "../animation/Slide";
 import RefLink from "../components/shared/RefLink";
 import EmailCopyLink from "../components/shared/EmailCopyLink";
@@ -78,9 +79,10 @@ export default async function About() {
           </aside>
         </section>
         <Slide delay={0.14}>
+          <SoftSkills />
           <Usage />
         </Slide>
-        <Heroes />
+
       </div>
     </main>
   );
