@@ -26,7 +26,7 @@ export default function MobileMenu() {
     },
     {
       title: "Contact",
-      href: "/about",
+      href: "/contact",
       icon: HiUser,
     },
   ];

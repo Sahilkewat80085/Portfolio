@@ -20,7 +20,7 @@ export default function Navbar() {
     },
     {
       title: "Contact",
-      href: "/about",
+      href: "/contact",
     },
   ];
 
