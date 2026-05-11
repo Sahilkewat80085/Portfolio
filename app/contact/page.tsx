@@ -12,7 +12,7 @@ export const metadata: Metadata = {
 
 export default function Contact() {
   return (
-    <main className="max-w-7xl mx-auto md:px-16 px-6 lg:mt-32 mt-20">
+    <main className="max-w-7xl mx-auto md:px-16 px-6 lg:mt-16 mt-10 no-scrollbar overflow-hidden">
       <section className="grid lg:grid-cols-2 grid-cols-1 gap-x-20 gap-y-12">
         <div className="flex flex-col gap-y-8">
           <Slide>
