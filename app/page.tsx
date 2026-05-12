@@ -13,7 +13,7 @@ export default async function Home() {
       <section className="flex xl:flex-row flex-col xl:items-center items-start xl:justify-center justify-between gap-x-12 lg:mb-32 mb-20">
         <div className="lg:max-w-2xl max-w-2xl">
           <Slide>
-            <h1 className="font-incognito font-semibold tracking-tight text-3xl sm:text-5xl mb-6 lg:leading-[3.7rem] leading-tight lg:min-w-[700px] min-w-full">
+            <h1 className="font-incognito font-semibold tracking-tight text-3xl sm:text-5xl mb-6 lg:leading-[3.7rem] leading-tight max-w-3xl">
               {profile.headline}
             </h1>
             <p className="text-base dark:text-zinc-400 text-zinc-600 leading-relaxed">
