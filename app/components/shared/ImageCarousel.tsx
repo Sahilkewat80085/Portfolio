@@ -23,7 +23,7 @@ export default function ImageCarousel() {
   }, []);
 
   return (
-    <div className="relative w-[400px] h-[400px] rounded-2xl overflow-hidden">
+    <div className="relative w-full max-w-[400px] aspect-square rounded-2xl overflow-hidden mx-auto lg:mx-0">
       <AnimatePresence mode="popLayout">
         <motion.div
           key={currentIndex}
