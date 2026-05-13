@@ -65,7 +65,7 @@ export default function Contact() {
                   </a>
                   <div className="flex items-center gap-x-3 dark:text-zinc-400 text-zinc-600">
                     <BiMap className="text-xl" />
-                    {profile.location}
+                    Pune, Maharashtra, India
                   </div>
                 </div>
               </div>
