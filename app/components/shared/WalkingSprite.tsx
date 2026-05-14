@@ -17,16 +17,54 @@ const directionMap: Record<string, number> = {
 };
 
 const MESSAGES = [
-  "My name Ji-Ji, I'm Sahil's secretary!",
+  "Hello, My name Ji-Ji, I'm Sahil's secretary!",
   "Sahil is probably building something awesome right now...",
   "Have you checked the projects section?",
   "I love patrolling this portfolio!",
   "Need a great dev? Sahil is your guy!",
-  "Ji-Ji is always on duty! 🫡",
+  "Ji-Ji is always on duty!",
   "Check out Sahil's GitHub calendar above!",
   "Psst… Sahil also has a resume you can download!",
-  "Did you know Sahil loves building things from scratch?",
+  "Did you know Sahil loves building things?, He built me tho!!",
   "Don't forget to connect with Sahil on LinkedIn!",
+  "My pixel-legs are getting a real workout today.",
+  "Sahil told me to look busy. Am I doing it right?",
+  "Wait, did I leave the production server on fire?",
+  "I'm not paid enough for all this cardio.",
+  "Error 404: Motivation to walk any further not found.",
+  "Is it just me, or is that cursor watching us?",
+  "I've walked five miles and I'm still on the same div.",
+  "Don't tell Sahil, but I think his code is sentient.",
+  "I'm only here for the free cloud storage and the views.",
+  "If I walk off the screen, consider me on vacation.",
+  "Debugging is just detective work where you are also the killer.",
+  "I'm a 2D secretary in a 3D world. It's complicated.",
+  "Have you seen Sahil's resume? It's less pixelated than me.",
+  "I'd offer you a coffee, but I lack the necessary logic gates.",
+  "Seriously, just hire Sahil already. My pixel-knees are hurting.",
+  "Sahil is a coding machine. You should probably put him on your payroll.",
+  "If you don't hire him, I'm going to start charging you for these walks.",
+  "Hire Sahil. Your codebase will thank you. And I might get a day off.",
+  "Looking for a sign to hire a dev? This is it. Right here.",
+  "Fun fact: Sahil can debug code in his sleep. I've seen it.",
+  "Did you know Sahil once built a robot that only fetches high-quality code?",
+  "Sahil's coffee to code ratio is statistically significant.",
+  "Fun fact: Sahil speaks fluent JavaScript, Python, and Sarcasm.",
+  "Sahil doesn't just write code, he crafts digital experiences. And sprites like me.",
+  "I'm not a bot, I'm a highly advanced sequence of pixels.",
+  "Sahil once wrote an entire app using only his left hand. Probably.",
+  "If you find a bug, it's actually a feature Sahil added for character.",
+  "I'm thinking of starting a union for portfolio sprites.",
+  "Does this sprite sheet make me look fat?",
+  "Sahil's keyboard has seen things you wouldn't believe.",
+  "I'm the only secretary who works for free and never complains. Mostly.",
+  "Just click a project. Any project. They're all great.",
+  "Wait, did Sahil just push to main? Brave man.",
+  "I'm waiting for the day Sahil upgrades me to 4K.",
+  "Life as a sprite is just loop after loop. Send help.",
+  "Are you a CSS file? Because you've got style.",
+  "My heart skips a frame whenever you scroll by.",
+  "Is your Wi-Fi signal strong? Because I'm feeling a connection.",
 ];
 
 const WalkingSprite = () => {
@@ -183,8 +221,7 @@ const WalkingSprite = () => {
         if (cancelled) break;
 
         // She arrived and is facing the user – show a dialog
-        const idx = 1 + (messageIndexRef.current % (MESSAGES.length - 1));
-        messageIndexRef.current++;
+        const idx = Math.floor(Math.random() * (MESSAGES.length - 1)) + 1;
         setMessage(MESSAGES[idx]);
 
         // Stand still while speaking (2.5–4 seconds)
