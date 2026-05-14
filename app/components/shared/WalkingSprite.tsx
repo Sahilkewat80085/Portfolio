@@ -1,10 +1,13 @@
 "use client";
 
 import { useState, useEffect, useCallback, useRef } from "react";
-import { motion, useAnimation, AnimatePresence } from "framer-motion";
+import { AnimatePresence, motion } from "framer-motion";
 
-const SPRITE_SIZE = 64; 
-const SPRITE_SHEET = "/sprite.png"; 
+const SPRITE_SIZE = 64;
+const SPRITE_SHEET = "/sprite.png";
+const SPEED = 55; // px per second
+const FRAME_INTERVAL = 200; // ms per frame
+const SAFE_MARGIN = 16; // px from viewport edge for dialog
 
 const directionMap: Record<string, number> = {
   down: 0,
@@ -14,206 +17,253 @@ const directionMap: Record<string, number> = {
 };
 
 const MESSAGES = [
-  "Hi! I'm Ji-Ji, Sahil's secretary.",
-  "Sahil is probably building something awesome!",
-  "Have you seen the Github calendar below?",
-  "I love walking around this portfolio!",
-  "Need a dev? Sahil is your guy!",
-  "Ji-Ji is here to help! (mostly just to walk though)",
+  "My name Ji-Ji, I'm Sahil's secretary!",
+  "Sahil is probably building something awesome right now...",
+  "Have you checked the projects section?",
+  "I love patrolling this portfolio!",
+  "Need a great dev? Sahil is your guy!",
+  "Ji-Ji is always on duty! 🫡",
+  "Check out Sahil's GitHub calendar above!",
+  "Psst… Sahil also has a resume you can download!",
+  "Did you know Sahil loves building things from scratch?",
+  "Don't forget to connect with Sahil on LinkedIn!",
 ];
 
 const WalkingSprite = () => {
-  const [direction, setDirection] = useState("down");
+  const [posX, setPosX] = useState(20);
+  const [direction, setDirection] = useState<"left" | "right" | "down">("down");
   const [frame, setFrame] = useState(0);
+  const [isWalking, setIsWalking] = useState(false);
   const [message, setMessage] = useState<string | null>(null);
-  const controls = useAnimation();
-  const isFirstRun = useRef(true);
-  const [dialogOffset, setDialogOffset] = useState(0);
+  const [dialogWidth, setDialogWidth] = useState(0);
+
+  const posXRef = useRef(20);
+  const targetXRef = useRef<number | null>(null);
+  const rafRef = useRef<number | null>(null);
+  const lastTimeRef = useRef<number | null>(null);
   const dialogRef = useRef<HTMLDivElement>(null);
-  
-  // Sprite animation loop
-  useEffect(() => {
-    const frameInterval = setInterval(() => {
-      setFrame((prev) => (prev + 1) % 4);
-    }, 150);
-    return () => clearInterval(frameInterval);
-  }, []);
+  const messageIndexRef = useRef(1); // skip intro (index 0)
 
-  // Boundary check for dialog box
+  // ─── Frame ticker (only animate when walking) ──────────────────────────────
   useEffect(() => {
-    if (message && dialogRef.current) {
-      const checkBoundaries = () => {
-        if (!dialogRef.current) return;
-        const rect = dialogRef.current.getBoundingClientRect();
-        const safetyMargin = 20;
-        const windowWidth = window.innerWidth;
-        
-        let offset = 0;
-        if (rect.left < safetyMargin) {
-          offset = safetyMargin - rect.left;
-        } else if (rect.right > windowWidth - safetyMargin) {
-          offset = windowWidth - safetyMargin - rect.right;
-        }
-        setDialogOffset(offset);
-      };
+    if (!isWalking) {
+      setFrame(0);
+      return;
+    }
+    const iv = setInterval(() => setFrame((p) => (p + 1) % 4), FRAME_INTERVAL);
+    return () => clearInterval(iv);
+  }, [isWalking]);
 
-      // Check immediately and after a small delay to handle transitions
-      checkBoundaries();
-      const timer = setTimeout(checkBoundaries, 100);
-      return () => clearTimeout(timer);
+  // ─── Measure dialog width whenever message changes ─────────────────────────
+  useEffect(() => {
+    if (message) {
+      const t = setTimeout(() => {
+        if (dialogRef.current) setDialogWidth(dialogRef.current.offsetWidth);
+      }, 60);
+      return () => clearTimeout(t);
     } else {
-      setDialogOffset(0);
+      setDialogWidth(0);
     }
   }, [message]);
 
-  const getNextPosition = useCallback(() => {
-    const windowWidth = window.innerWidth;
-    const windowHeight = window.innerHeight;
-    const contentWidth = Math.min(windowWidth, 1280);
-    const sideMargin = (windowWidth - contentWidth) / 2;
-    
-    // Default to at least some padding if window is narrow
-    const effectiveMargin = Math.max(sideMargin, 60); 
-    
-    const isLeft = Math.random() > 0.5;
-    
-    let targetX;
-    const BUFFER = 15; // Keep away from the absolute edge
-    
-    if (isLeft) {
-      const maxRange = Math.max(0, effectiveMargin - SPRITE_SIZE - BUFFER);
-      targetX = BUFFER + Math.random() * maxRange;
-    } else {
-      const minX = windowWidth - effectiveMargin + BUFFER;
-      const maxRange = Math.max(0, effectiveMargin - SPRITE_SIZE - BUFFER);
-      targetX = minX + Math.random() * maxRange;
-    }
-    
-    // Always stay at the bottom
-    const targetY = windowHeight - SPRITE_SIZE - 20;
-    
-    return { x: targetX, y: targetY };
+  // Also keep dialog width up to date while she moves
+  useEffect(() => {
+    if (!message) return;
+    const iv = setInterval(() => {
+      if (dialogRef.current) setDialogWidth(dialogRef.current.offsetWidth);
+    }, 80);
+    return () => clearInterval(iv);
+  }, [message]);
+
+  // ─── Clamped dialog left (in px, relative to sprite div) ──────────────────
+  const computeDialogLeft = (x: number, dw: number): string => {
+    if (dw === 0) return "-9999px";
+    const spriteCenter = x + SPRITE_SIZE / 2;
+    const natural = spriteCenter - dw / 2;
+    const clamped = Math.max(
+      SAFE_MARGIN,
+      Math.min(natural, window.innerWidth - dw - SAFE_MARGIN)
+    );
+    return `${clamped - x}px`;
+  };
+
+  const computePointerLeft = (x: number, dw: number): string => {
+    if (dw === 0) return "50%";
+    const spriteCenter = x + SPRITE_SIZE / 2;
+    const natural = spriteCenter - dw / 2;
+    const clamped = Math.max(
+      SAFE_MARGIN,
+      Math.min(natural, window.innerWidth - dw - SAFE_MARGIN)
+    );
+    const ptr = spriteCenter - clamped;
+    return `${Math.max(10, Math.min(ptr, dw - 10))}px`;
+  };
+
+  // ─── Pick a random X along the full bottom edge (with a small margin) ──────
+  const getRandomX = useCallback(() => {
+    const w = window.innerWidth;
+    const minX = 20;
+    const maxX = w - SPRITE_SIZE - 20;
+    return minX + Math.random() * (maxX - minX);
   }, []);
 
-  useEffect(() => {
-    // Start at the bottom
-    let currentX = 20;
-    let currentY = window.innerHeight - SPRITE_SIZE - 20;
+  // ─── rAF walk to a target ──────────────────────────────────────────────────
+  const startWalking = useCallback((target: number) => {
+    targetXRef.current = target;
+    lastTimeRef.current = null;
+    setIsWalking(true);
+    if (rafRef.current) cancelAnimationFrame(rafRef.current);
 
-    const run = async () => {
-      // Set actual initial position based on window width
-      const startPos = getNextPosition();
-      currentX = startPos.x;
-      currentY = startPos.y;
-      controls.set({ x: currentX, y: currentY });
+    const animate = (time: number) => {
+      if (lastTimeRef.current === null) lastTimeRef.current = time;
+      const dt = (time - lastTimeRef.current) / 1000;
+      lastTimeRef.current = time;
 
-      // Starting dialog
-      if (isFirstRun.current) {
-        setMessage("My name Ji-Ji, I'm Sahil's secretary!");
-        await new Promise(r => setTimeout(r, 4500));
-        setMessage(null);
-        isFirstRun.current = false;
-        await new Promise(r => setTimeout(r, 1000));
+      const tgt = targetXRef.current!;
+      const cur = posXRef.current;
+      const dist = tgt - cur;
+      const step = SPEED * dt;
+
+      if (Math.abs(dist) <= step) {
+        posXRef.current = tgt;
+        setPosX(tgt);
+        targetXRef.current = null;
+        setIsWalking(false);
+        setDirection("down"); // face the user when idle
+        return;
       }
 
-      while (true) {
-        const nextPos = getNextPosition();
-        
-        // Calculate direction
-        const dx = nextPos.x - currentX;
-        const dy = nextPos.y - currentY;
-        
-        let newDir = "down";
-        if (Math.abs(dx) > Math.abs(dy)) {
-          newDir = dx > 0 ? "right" : "left";
-        } else {
-          newDir = dy > 0 ? "down" : "up";
-        }
-        setDirection(newDir);
+      const newX = cur + Math.sign(dist) * step;
+      posXRef.current = newX;
+      setPosX(newX);
+      setDirection(dist > 0 ? "right" : "left");
+      rafRef.current = requestAnimationFrame(animate);
+    };
 
-        // Constant speed movement
-        const distance = Math.sqrt(dx * dx + dy * dy);
-        const SPEED = 50; // Constant pixels per second
-        const duration = distance / SPEED;
+    rafRef.current = requestAnimationFrame(animate);
+  }, []);
 
-        await controls.start({
-          x: nextPos.x,
-          y: nextPos.y,
-          transition: { duration, ease: "linear" }
-        });
+  // ─── Intro greeting ────────────────────────────────────────────────────────
+  useEffect(() => {
+    setMessage(MESSAGES[0]);
+    const t = setTimeout(() => setMessage(null), 4000);
+    return () => clearTimeout(t);
+  }, []);
 
-        currentX = nextPos.x;
-        currentY = nextPos.y;
-        setFrame(0); // Stop animation
+  // ─── Walk loop – completely independent of dialogs ─────────────────────────
+  useEffect(() => {
+    let cancelled = false;
 
-        // Random chance to speak when arriving
-        if (Math.random() > 0.5) {
-          const randomMsg = MESSAGES[Math.floor(Math.random() * MESSAGES.length)];
-          setMessage(randomMsg);
-          await new Promise(r => setTimeout(r, 4000));
-          setMessage(null);
-        }
+    const sleep = (ms: number) =>
+      new Promise<void>((r) => setTimeout(r, ms));
 
-        // Idle for a bit
-        await new Promise((r) => setTimeout(r, 4000 + Math.random() * 6000));
+    const waitArrived = () =>
+      new Promise<void>((r) => {
+        const check = () => {
+          if (targetXRef.current === null) return r();
+          setTimeout(check, 50);
+        };
+        check();
+      });
+
+    const run = async () => {
+      await sleep(600);
+      posXRef.current = 20;
+      setPosX(20);
+
+      // Skip first stop dialog since intro greeting is already showing
+      await sleep(4500);
+      if (cancelled) return;
+
+      while (!cancelled) {
+        // Walk to a random position
+        const target = getRandomX();
+        startWalking(target);
+        await waitArrived();
+        if (cancelled) break;
+
+        // She arrived and is facing the user – show a dialog
+        const idx = 1 + (messageIndexRef.current % (MESSAGES.length - 1));
+        messageIndexRef.current++;
+        setMessage(MESSAGES[idx]);
+
+        // Stand still while speaking (2.5–4 seconds)
+        const standDuration = 2500 + Math.random() * 1500;
+        await sleep(standDuration);
+        if (cancelled) break;
+
+        // Clear dialog just before walking again
+        setMessage(null);
+        await sleep(400);
+        if (cancelled) break;
       }
     };
 
     run();
-  }, [controls, getNextPosition]);
+    return () => {
+      cancelled = true;
+      if (rafRef.current) cancelAnimationFrame(rafRef.current);
+    };
+  }, [getRandomX, startWalking]);
 
   return (
-    <motion.div
-      animate={controls}
-      initial={{ x: 20, y: 800 }} 
+    <div
       style={{
         position: "fixed",
-        top: 0,
-        left: 0,
+        bottom: 20,
+        left: posX,
         width: SPRITE_SIZE,
         height: SPRITE_SIZE,
         zIndex: 100,
         pointerEvents: "none",
       }}
     >
+      {/* Dialog bubble */}
       <AnimatePresence>
         {message && (
           <motion.div
             ref={dialogRef}
-            initial={{ opacity: 0, y: 0, scale: 0.5 }}
-            animate={{ 
-              opacity: 1, 
-              y: -60, 
-              scale: 1,
-              x: `calc(-50% + ${dialogOffset}px)` 
-            }}
-            exit={{ opacity: 0, scale: 0.5, y: -20 }}
-            className="absolute left-1/2"
+            key={message}
+            initial={{ opacity: 0, scale: 0.75 }}
+            animate={{ opacity: 1, scale: 1 }}
+            exit={{ opacity: 0, scale: 0.75 }}
+            transition={{ duration: 0.15 }}
             style={{
+              position: "absolute",
+              bottom: SPRITE_SIZE + 8,
+              left: computeDialogLeft(posX, dialogWidth),
               backgroundColor: "white",
               border: "3px solid black",
-              padding: "6px 12px",
+              padding: "6px 10px",
               color: "black",
-              fontSize: "13px",
-              fontWeight: "600",
-              fontFamily: "var(--gitlabmono), monospace",
-              boxShadow: "4px 4px 0px rgba(0,0,0,0.15)",
+              fontSize: "12px",
+              fontWeight: "700",
+              fontFamily: "monospace",
+              boxShadow: "3px 3px 0px rgba(0,0,0,0.2)",
               whiteSpace: "nowrap",
               imageRendering: "pixelated",
             }}
           >
             {message}
-            {/* Pixel pointer */}
-            <div 
-              className="absolute -bottom-[8px] left-1/2 -translate-x-1/2 w-3 h-3 bg-white border-r-[3px] border-b-[3px] border-black rotate-45"
+            {/* Pointer triangle */}
+            <div
               style={{
-                left: `calc(50% - ${dialogOffset}px)` 
+                position: "absolute",
+                bottom: -8,
+                left: computePointerLeft(posX, dialogWidth),
+                transform: "translateX(-50%) rotate(45deg)",
+                width: 12,
+                height: 12,
+                backgroundColor: "white",
+                borderRight: "3px solid black",
+                borderBottom: "3px solid black",
               }}
             />
           </motion.div>
         )}
       </AnimatePresence>
 
+      {/* Sprite */}
       <div
         style={{
           width: "100%",
@@ -222,10 +272,10 @@ const WalkingSprite = () => {
           backgroundSize: `${SPRITE_SIZE * 4}px ${SPRITE_SIZE * 4}px`,
           backgroundPosition: `-${directionMap[direction] * SPRITE_SIZE}px -${frame * SPRITE_SIZE}px`,
           imageRendering: "pixelated",
-          filter: "drop-shadow(0 4px 6px rgba(0,0,0,0.1))",
+          filter: "drop-shadow(0 4px 6px rgba(0,0,0,0.15))",
         }}
       />
-    </motion.div>
+    </div>
   );
 };
 
