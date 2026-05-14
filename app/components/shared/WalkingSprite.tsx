@@ -89,14 +89,16 @@ const WalkingSprite = () => {
       targetX = minX + Math.random() * maxRange;
     }
     
-    const targetY = BUFFER + Math.random() * (windowHeight - SPRITE_SIZE - BUFFER * 2);
+    // Always stay at the bottom
+    const targetY = windowHeight - SPRITE_SIZE - 20;
     
     return { x: targetX, y: targetY };
   }, []);
 
   useEffect(() => {
+    // Start at the bottom
     let currentX = 20;
-    let currentY = 100;
+    let currentY = window.innerHeight - SPRITE_SIZE - 20;
 
     const run = async () => {
       // Set actual initial position based on window width
@@ -129,9 +131,10 @@ const WalkingSprite = () => {
         }
         setDirection(newDir);
 
-        // Move
+        // Constant speed movement
         const distance = Math.sqrt(dx * dx + dy * dy);
-        const duration = distance / 70; // Steady walking pace
+        const SPEED = 50; // Constant pixels per second
+        const duration = distance / SPEED;
 
         await controls.start({
           x: nextPos.x,
@@ -162,7 +165,7 @@ const WalkingSprite = () => {
   return (
     <motion.div
       animate={controls}
-      initial={{ x: 20, y: 100 }} 
+      initial={{ x: 20, y: 800 }} 
       style={{
         position: "fixed",
         top: 0,
