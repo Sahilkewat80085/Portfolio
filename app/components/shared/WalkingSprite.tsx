@@ -28,6 +28,8 @@ const WalkingSprite = () => {
   const [message, setMessage] = useState<string | null>(null);
   const controls = useAnimation();
   const isFirstRun = useRef(true);
+  const [dialogOffset, setDialogOffset] = useState(0);
+  const dialogRef = useRef<HTMLDivElement>(null);
   
   // Sprite animation loop
   useEffect(() => {
@@ -36,6 +38,33 @@ const WalkingSprite = () => {
     }, 150);
     return () => clearInterval(frameInterval);
   }, []);
+
+  // Boundary check for dialog box
+  useEffect(() => {
+    if (message && dialogRef.current) {
+      const checkBoundaries = () => {
+        if (!dialogRef.current) return;
+        const rect = dialogRef.current.getBoundingClientRect();
+        const safetyMargin = 20;
+        const windowWidth = window.innerWidth;
+        
+        let offset = 0;
+        if (rect.left < safetyMargin) {
+          offset = safetyMargin - rect.left;
+        } else if (rect.right > windowWidth - safetyMargin) {
+          offset = windowWidth - safetyMargin - rect.right;
+        }
+        setDialogOffset(offset);
+      };
+
+      // Check immediately and after a small delay to handle transitions
+      checkBoundaries();
+      const timer = setTimeout(checkBoundaries, 100);
+      return () => clearTimeout(timer);
+    } else {
+      setDialogOffset(0);
+    }
+  }, [message]);
 
   const getNextPosition = useCallback(() => {
     const windowWidth = window.innerWidth;
@@ -49,13 +78,18 @@ const WalkingSprite = () => {
     const isLeft = Math.random() > 0.5;
     
     let targetX;
+    const BUFFER = 15; // Keep away from the absolute edge
+    
     if (isLeft) {
-      targetX = Math.random() * (effectiveMargin - SPRITE_SIZE);
+      const maxRange = Math.max(0, effectiveMargin - SPRITE_SIZE - BUFFER);
+      targetX = BUFFER + Math.random() * maxRange;
     } else {
-      targetX = windowWidth - effectiveMargin + Math.random() * (effectiveMargin - SPRITE_SIZE);
+      const minX = windowWidth - effectiveMargin + BUFFER;
+      const maxRange = Math.max(0, effectiveMargin - SPRITE_SIZE - BUFFER);
+      targetX = minX + Math.random() * maxRange;
     }
     
-    const targetY = Math.random() * (windowHeight - SPRITE_SIZE);
+    const targetY = BUFFER + Math.random() * (windowHeight - SPRITE_SIZE - BUFFER * 2);
     
     return { x: targetX, y: targetY };
   }, []);
@@ -142,10 +176,16 @@ const WalkingSprite = () => {
       <AnimatePresence>
         {message && (
           <motion.div
+            ref={dialogRef}
             initial={{ opacity: 0, y: 0, scale: 0.5 }}
-            animate={{ opacity: 1, y: -60, scale: 1 }}
+            animate={{ 
+              opacity: 1, 
+              y: -60, 
+              scale: 1,
+              x: `calc(-50% + ${dialogOffset}px)` 
+            }}
             exit={{ opacity: 0, scale: 0.5, y: -20 }}
-            className="absolute left-1/2 -translate-x-1/2"
+            className="absolute left-1/2"
             style={{
               backgroundColor: "white",
               border: "3px solid black",
@@ -163,6 +203,9 @@ const WalkingSprite = () => {
             {/* Pixel pointer */}
             <div 
               className="absolute -bottom-[8px] left-1/2 -translate-x-1/2 w-3 h-3 bg-white border-r-[3px] border-b-[3px] border-black rotate-45"
+              style={{
+                left: `calc(50% - ${dialogOffset}px)` 
+              }}
             />
           </motion.div>
         )}
