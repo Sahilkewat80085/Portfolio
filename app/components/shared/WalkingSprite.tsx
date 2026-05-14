@@ -17,7 +17,7 @@ const directionMap: Record<string, number> = {
 };
 
 const MESSAGES = [
-  "Hello, My name Ji-Ji, I'm Sahil's secretary!",
+  "Hello, My name is Ji-Ji, I'm Sahil's secretary!",
   "Sahil is probably building something awesome right now...",
   "Have you checked the projects section?",
   "I love patrolling this portfolio!",
