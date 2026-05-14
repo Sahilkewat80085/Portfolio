@@ -2,6 +2,7 @@
 
 import Navbar from "./Navbar";
 import Footer from "./Footer";
+import WalkingSprite from "../shared/WalkingSprite";
 
 export default function AppShell({
   children,
@@ -12,6 +13,7 @@ export default function AppShell({
     <>
       <Navbar />
       {children}
+      <WalkingSprite />
       <Footer />
     </>
   );
