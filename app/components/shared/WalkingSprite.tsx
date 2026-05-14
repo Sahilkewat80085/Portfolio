@@ -61,10 +61,16 @@ const WalkingSprite = () => {
   }, []);
 
   useEffect(() => {
-    let currentX = 0;
-    let currentY = 0;
+    let currentX = 20;
+    let currentY = 100;
 
     const run = async () => {
+      // Set actual initial position based on window width
+      const startPos = getNextPosition();
+      currentX = startPos.x;
+      currentY = startPos.y;
+      controls.set({ x: currentX, y: currentY });
+
       // Starting dialog
       if (isFirstRun.current) {
         setMessage("My name Ji-Ji, I'm Sahil's secretary!");
@@ -122,7 +128,7 @@ const WalkingSprite = () => {
   return (
     <motion.div
       animate={controls}
-      initial={{ x: -100, y: 100 }} 
+      initial={{ x: 20, y: 100 }} 
       style={{
         position: "fixed",
         top: 0,
