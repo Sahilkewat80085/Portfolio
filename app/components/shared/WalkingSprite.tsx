@@ -2,6 +2,8 @@
 
 import { useState, useEffect, useCallback, useRef } from "react";
 import { AnimatePresence, motion } from "framer-motion";
+import Image from "next/image";
+import funImage from "@/public/yeah-right.png";
 
 const SPRITE_SIZE = 64;
 const SPRITE_SHEET = "/sprite.png";
@@ -74,6 +76,7 @@ const WalkingSprite = () => {
   const [isWalking, setIsWalking] = useState(false);
   const [message, setMessage] = useState<string | null>(null);
   const [dialogWidth, setDialogWidth] = useState(0);
+  const [showEasterEgg, setShowEasterEgg] = useState(false);
 
   const posXRef = useRef(20);
   const targetXRef = useRef<number | null>(null);
@@ -244,17 +247,23 @@ const WalkingSprite = () => {
   }, [getRandomX, startWalking]);
 
   return (
-    <div
-      style={{
-        position: "fixed",
-        bottom: 20,
-        left: posX,
-        width: SPRITE_SIZE,
-        height: SPRITE_SIZE,
-        zIndex: 100,
-        pointerEvents: "none",
-      }}
-    >
+    <>
+      <div
+        onClick={() => {
+          setShowEasterEgg(true);
+          setTimeout(() => setShowEasterEgg(false), 3000);
+        }}
+        style={{
+          position: "fixed",
+          bottom: 20,
+          left: posX,
+          width: SPRITE_SIZE,
+          height: SPRITE_SIZE,
+          zIndex: 100,
+          pointerEvents: "auto",
+          cursor: "pointer",
+        }}
+      >
       {/* Dialog bubble */}
       <AnimatePresence>
         {message && (
@@ -311,8 +320,21 @@ const WalkingSprite = () => {
           imageRendering: "pixelated",
           filter: "drop-shadow(0 4px 6px rgba(0,0,0,0.15))",
         }}
+      </div>
+
+      {/* Easter Egg Image */}
+      <Image
+        className={`fixed z-[1000] bottom-1/2 duration-1000 ease-[cubic-bezier(0.77,0,0.175,1)] ${
+          showEasterEgg ? "left-0" : "-left-[300px]"
+        }`}
+        src={funImage}
+        width={250}
+        height={250}
+        quality={100}
+        alt="yeah right"
+        style={{ pointerEvents: "none", transitionProperty: "left" }}
       />
-    </div>
+    </>
   );
 };
 
