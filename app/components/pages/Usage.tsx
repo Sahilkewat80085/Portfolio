@@ -3,7 +3,7 @@ import { profile } from "@/app/data/portfolio";
 
 export default async function Usage() {
   return (
-    <section className="max-w-4xl">
+    <section className="max-w-6xl">
       <div className="mb-8">
         <h2 className="text-4xl mb-4 font-bold tracking-tight">Usage</h2>
         <p className="dark:text-zinc-400 text-zinc-600 max-w-xl">
@@ -11,7 +11,7 @@ export default async function Usage() {
           to.
         </p>
       </div>
-      <ul className="grid grid-cols-1 md:grid-cols-3 gap-x-8 gap-y-4 dark:text-zinc-400 text-zinc-600">
+      <ul className="grid grid-cols-1 md:grid-cols-3 gap-x-16 gap-y-6 dark:text-zinc-400 text-zinc-600">
         {profile.usage.map((item) => (
           <li
             key={item.name}
