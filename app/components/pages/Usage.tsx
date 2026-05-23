@@ -11,7 +11,7 @@ export default async function Usage() {
           to.
         </p>
       </div>
-      <ul className="grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-4 dark:text-zinc-400 text-zinc-600">
+      <ul className="grid grid-cols-1 md:grid-cols-3 gap-x-8 gap-y-4 dark:text-zinc-400 text-zinc-600">
         {profile.usage.map((item) => (
           <li
             key={item.name}

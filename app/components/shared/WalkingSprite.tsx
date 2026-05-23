@@ -184,7 +184,7 @@ const WalkingSprite = () => {
   // ─── Intro greeting ────────────────────────────────────────────────────────
   useEffect(() => {
     setMessage(MESSAGES[0]);
-    const t = setTimeout(() => setMessage(null), 4000);
+    const t = setTimeout(() => setMessage(null), 5000);
     return () => clearTimeout(t);
   }, []);
 
@@ -224,8 +224,8 @@ const WalkingSprite = () => {
         const idx = Math.floor(Math.random() * (MESSAGES.length - 1)) + 1;
         setMessage(MESSAGES[idx]);
 
-        // Stand still while speaking (2.5–4 seconds)
-        const standDuration = 2500 + Math.random() * 1500;
+        // Stand still while speaking (5 seconds)
+        const standDuration = 5000;
         await sleep(standDuration);
         if (cancelled) break;
 
