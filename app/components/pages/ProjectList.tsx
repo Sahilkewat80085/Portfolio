@@ -5,6 +5,7 @@ import Image from "next/image";
 import { Slide } from "../../animation/Slide";
 import { PortfolioProject } from "@/app/data/portfolio";
 import { BiLinkExternal, BiLogoGithub, BiX } from "react-icons/bi";
+import { ProjectIcon } from "../shared/ProjectIcons";
 
 type Props = {
   projects: PortfolioProject[];
@@ -26,15 +27,11 @@ export default function ProjectList({ projects }: Props) {
           >
             <div className="flex items-center gap-x-4">
               {project.logo ? (
-                <Image
-                  src={project.logo}
-                  width={60}
-                  height={60}
-                  alt={project.name}
-                  className="dark:bg-zinc-800 bg-zinc-100 rounded-md p-2"
-                />
+                <div className="flex-shrink-0 dark:bg-zinc-800 bg-zinc-100 rounded-md p-2 w-[60px] h-[60px] flex items-center justify-center text-zinc-600 dark:text-zinc-400 group-hover:text-secondary-color group-hover:dark:text-primary-color transition-colors duration-300">
+                  <ProjectIcon name={project.logo} className="w-8 h-8" />
+                </div>
               ) : (
-                <div className="dark:bg-primary-bg bg-zinc-50 border border-transparent dark:hover:border-zinc-700 hover:border-zinc-200 p-2 rounded-lg text-3xl">
+                <div className="dark:bg-primary-bg bg-zinc-50 border border-transparent dark:hover:border-zinc-700 hover:border-zinc-200 p-2 rounded-lg text-3xl flex items-center justify-center w-[60px] h-[60px]">
                   P
                 </div>
               )}

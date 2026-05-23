@@ -154,7 +154,7 @@ export const projects: PortfolioProject[] = [
     tagline: "Autonomous Agent Infrastructure",
     projectUrl: "",
     repository: "https://github.com/Reality373/CottonX",
-    logo: "/logo.png",
+    logo: "cottonx",
     coverImage: "/projects/cottonx/ss1.png",
     description: [
       "CottonX is a robust infrastructure for deploying and managing autonomous AI agents capable of executing secure, reliable onchain operations based on user-defined intents.",
@@ -177,7 +177,7 @@ export const projects: PortfolioProject[] = [
     tagline: "A Modular Python Library for Machine Learning Automation",
     projectUrl: "",
     repository: "https://github.com/Sahilkewat80085/OctoPy",
-    logo: "/logo.png",
+    logo: "octopy",
     coverImage: "/projects/octopy/ss1.png",
     description: [
       "OctoPy is a modular machine learning support library that automates data preprocessing, feature selection, model evaluation, and report generation.",
@@ -201,7 +201,7 @@ export const projects: PortfolioProject[] = [
     tagline: "Autonomous Milestone-Based Escrow Engine",
     projectUrl: "",
     repository: "https://github.com/Sahilkewat80085/EscroX",
-    logo: "/logo.png",
+    logo: "escrox",
     coverImage: "/projects/escrox/ss1.png",
     description: [
       "EscroX is a next-generation escrow platform designed for the global digital economy, securing cross-border freelance payments using programmable finance.",
@@ -225,7 +225,7 @@ export const projects: PortfolioProject[] = [
     tagline: "The Whistleblower & Civic Shield Protocol",
     projectUrl: "",
     repository: "",
-    logo: "/logo.png",
+    logo: "nyayasetu",
     coverImage: "/projects/nyayasetu/ss1.png",
     description: [
       "NyayaSetu is a decentralized, end-to-end encrypted platform designed to protect whistleblowers, journalists, and civic informants when reporting corruption or human rights violations.",
@@ -252,7 +252,7 @@ export const projects: PortfolioProject[] = [
     tagline: "Smart Blood Donation & Emergency Assistance Platform",
     projectUrl: "",
     repository: "https://github.com/Sahilkewat80085/BloodCall",
-    logo: "/logo.png",
+    logo: "bloodcall",
     coverImage: "/projects/bloodcall/ss1.png",
     description: [
       "Developed a real-time blood donation and emergency assistance platform that connects blood donors, hospitals, and blood banks through a centralized system. The platform helps users quickly find compatible blood donors, check blood availability, and send emergency donation requests during critical situations.",
@@ -276,7 +276,7 @@ export const projects: PortfolioProject[] = [
     tagline: "Multi-Agent LLM Orchestration Platform",
     projectUrl: "",
     repository: "https://github.com/Sahilkewat80085/Orqestra",
-    logo: "/logo.png",
+    logo: "orqestra",
     coverImage: "/projects/orqestra/ss1.png",
     description: [
       "Built Orqestra, a production-grade multi-agent LLM orchestration platform using FastAPI, LangGraph, PostgreSQL, and Redis. Implemented dynamic agent routing, multi-hop RAG, critique-based validation, structured execution tracing, real-time SSE streaming, and context budget management through a typed shared-context architecture.",
