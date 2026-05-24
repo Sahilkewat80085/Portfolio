@@ -183,6 +183,7 @@ export default function ContributionGraph() {
 
                     const isNearLeft = weekIndex < 4;
                     const isNearRight = weekIndex > weeks.length - 5;
+                    const isNearTop = dayIndex < 3;
 
                     let tooltipAlignClass = "left-1/2 -translate-x-1/2";
                     let arrowAlignClass = "left-1/2 -translate-x-1/2";
@@ -195,6 +196,14 @@ export default function ContributionGraph() {
                       arrowAlignClass = "right-3 left-auto translate-x-0";
                     }
 
+                    let tooltipPositionClass = "bottom-full mb-2 origin-bottom";
+                    let arrowPositionClass = "top-full -mt-1 border-r border-b";
+
+                    if (isNearTop) {
+                      tooltipPositionClass = "top-full mt-2 origin-top";
+                      arrowPositionClass = "bottom-full -mb-1 border-t border-l";
+                    }
+
                     return (
                       <div
                         key={day.date}
@@ -205,7 +214,7 @@ export default function ContributionGraph() {
                       >
                         {/* Custom Glassmorphic Tooltip */}
                         <div
-                          className={`absolute bottom-full mb-2 opacity-0 scale-95 pointer-events-none group-hover:opacity-100 group-hover:scale-100 group-hover:pointer-events-auto flex flex-col gap-y-1 bg-zinc-900/95 dark:bg-zinc-950/95 backdrop-blur-md text-zinc-100 p-2.5 rounded-lg shadow-xl border border-zinc-200/10 dark:border-zinc-800/80 text-[11px] min-w-[140px] z-50 transition-all duration-200 origin-bottom ${tooltipAlignClass}`}
+                          className={`absolute ${tooltipPositionClass} opacity-0 scale-95 pointer-events-none group-hover:opacity-100 group-hover:scale-100 group-hover:pointer-events-auto flex flex-col gap-y-1 bg-zinc-900/95 dark:bg-zinc-950/95 backdrop-blur-md text-zinc-100 p-2.5 rounded-lg shadow-xl border border-zinc-200/10 dark:border-zinc-800/80 text-[11px] min-w-[140px] z-50 transition-all duration-200 ${tooltipAlignClass}`}
                         >
                           <div className="font-semibold text-zinc-300 border-b border-zinc-200/10 dark:border-zinc-850 pb-1 mb-1 whitespace-nowrap">
                             {formatDate(day.date)}
@@ -228,8 +237,8 @@ export default function ContributionGraph() {
                             </span>
                             <span className="font-medium text-zinc-200">{day.leetcode}</span>
                           </div>
-                          {/* Arrow pointing down to cell */}
-                          <div className={`absolute top-full -mt-1 w-2 h-2 rotate-45 bg-zinc-900 dark:bg-zinc-950 border-r border-b border-zinc-200/10 dark:border-zinc-800/80 ${arrowAlignClass}`}></div>
+                          {/* Arrow pointing down or up to cell */}
+                          <div className={`absolute ${arrowPositionClass} w-2 h-2 rotate-45 bg-zinc-900 dark:bg-zinc-950 border-zinc-200/10 dark:border-zinc-800/80 ${arrowAlignClass}`}></div>
                         </div>
                       </div>
                     );
