@@ -63,6 +63,20 @@ function chunkWeeks(days: ActivityDay[]) {
   return weeks;
 }
 
+function formatDate(dateStr: string) {
+  try {
+    const [year, month, day] = dateStr.split("-");
+    const date = new Date(parseInt(year), parseInt(month) - 1, parseInt(day));
+    return date.toLocaleDateString("en-US", {
+      month: "short",
+      day: "numeric",
+      year: "numeric",
+    });
+  } catch {
+    return dateStr;
+  }
+}
+
 export default function ContributionGraph() {
   const [data, setData] = useState<ActivityPayload | null>(null);
   const [loading, setLoading] = useState(true);
@@ -157,23 +171,69 @@ export default function ContributionGraph() {
             >
               {weeks.map((week, weekIndex) => (
                 <div key={weekIndex} className="grid grid-rows-7 gap-2">
-                  {week.map((day, dayIndex) =>
-                    day ? (
+                  {week.map((day, dayIndex) => {
+                    if (!day) {
+                      return (
+                        <div
+                          key={`empty-${weekIndex}-${dayIndex}`}
+                          className="w-3 h-3"
+                        />
+                      );
+                    }
+
+                    const isNearLeft = weekIndex < 4;
+                    const isNearRight = weekIndex > weeks.length - 5;
+
+                    let tooltipAlignClass = "left-1/2 -translate-x-1/2";
+                    let arrowAlignClass = "left-1/2 -translate-x-1/2";
+
+                    if (isNearLeft) {
+                      tooltipAlignClass = "left-0 translate-x-0 -ml-1";
+                      arrowAlignClass = "left-3 translate-x-0";
+                    } else if (isNearRight) {
+                      tooltipAlignClass = "right-0 left-auto translate-x-0 -mr-1";
+                      arrowAlignClass = "right-3 left-auto translate-x-0";
+                    }
+
+                    return (
                       <div
                         key={day.date}
-                        className={`w-3 h-3 rounded-[3px] transition-colors ${getCellClass(
+                        className={`relative group w-3 h-3 rounded-[3px] transition-colors cursor-pointer ${getCellClass(
                           day.total,
                           summary?.maxDayCount ?? 0
                         )}`}
-                        title={`${day.date}: ${day.total} total (${day.github} GitHub, ${day.leetcode} LeetCode)`}
-                      />
-                    ) : (
-                      <div
-                        key={`empty-${weekIndex}-${dayIndex}`}
-                        className="w-3 h-3"
-                      />
-                    )
-                  )}
+                      >
+                        {/* Custom Glassmorphic Tooltip */}
+                        <div
+                          className={`absolute bottom-full mb-2 opacity-0 scale-95 pointer-events-none group-hover:opacity-100 group-hover:scale-100 group-hover:pointer-events-auto flex flex-col gap-y-1 bg-zinc-900/95 dark:bg-zinc-950/95 backdrop-blur-md text-zinc-100 p-2.5 rounded-lg shadow-xl border border-zinc-200/10 dark:border-zinc-800/80 text-[11px] min-w-[140px] z-50 transition-all duration-200 origin-bottom ${tooltipAlignClass}`}
+                        >
+                          <div className="font-semibold text-zinc-300 border-b border-zinc-200/10 dark:border-zinc-850 pb-1 mb-1 whitespace-nowrap">
+                            {formatDate(day.date)}
+                          </div>
+                          <div className="flex justify-between items-center mb-0.5">
+                            <span className="text-zinc-400">Total:</span>
+                            <span className="font-bold text-emerald-400">{day.total}</span>
+                          </div>
+                          <div className="flex justify-between items-center text-[10px]">
+                            <span className="flex items-center gap-1.5 text-zinc-400">
+                              <span className="w-1.5 h-1.5 rounded-full bg-blue-500" />
+                              GitHub
+                            </span>
+                            <span className="font-medium text-zinc-200">{day.github}</span>
+                          </div>
+                          <div className="flex justify-between items-center text-[10px]">
+                            <span className="flex items-center gap-1.5 text-zinc-400">
+                              <span className="w-1.5 h-1.5 rounded-full bg-amber-500" />
+                              LeetCode
+                            </span>
+                            <span className="font-medium text-zinc-200">{day.leetcode}</span>
+                          </div>
+                          {/* Arrow pointing down to cell */}
+                          <div className={`absolute top-full -mt-1 w-2 h-2 rotate-45 bg-zinc-900 dark:bg-zinc-950 border-r border-b border-zinc-200/10 dark:border-zinc-800/80 ${arrowAlignClass}`}></div>
+                        </div>
+                      </div>
+                    );
+                  })}
                 </div>
               ))}
             </div>
