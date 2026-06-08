@@ -112,6 +112,16 @@ export const profile: PortfolioProfile = {
 
 export const jobs: PortfolioJob[] = [
   {
+    id: "job-4",
+    name: "GaoTek Inc",
+    jobTitle: "AI Engineer",
+    url: "#",
+    logo: "/gaotek_logo.png",
+    description:
+      "Responsible for AI engineering chores such as building a RAG pipeline and setting up continuous integration for it.",
+    startDate: "2026-06-01",
+  },
+  {
     id: "job-1",
     name: "Tata via Forage",
     jobTitle: "GenAI Powered Data Analyst",
