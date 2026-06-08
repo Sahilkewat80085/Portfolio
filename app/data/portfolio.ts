@@ -210,7 +210,7 @@ export const projects: PortfolioProject[] = [
     name: "EscroX",
     tagline: "Autonomous Milestone-Based Escrow Engine",
     projectUrl: "",
-    repository: "https://github.com/Sahilkewat80085/EscroX",
+    repository: "https://github.com/dhruvpal102005/EscroX",
     logo: "escrox",
     coverImage: "/projects/escrox/ss1.png",
     description: [
