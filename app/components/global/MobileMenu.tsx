@@ -11,22 +11,22 @@ export default function MobileMenu() {
   const data = [
     {
       title: "Home",
-      href: "/",
+      href: "/#home",
       icon: HiHome,
     },
     {
       title: "About",
-      href: "/about",
+      href: "/#about",
       icon: HiUser,
     },
     {
       title: "Projects",
-      href: "/projects",
+      href: "/#projects",
       icon: HiBeaker,
     },
     {
       title: "Contact",
-      href: "/contact",
+      href: "/#contact",
       icon: HiUser,
     },
   ];
