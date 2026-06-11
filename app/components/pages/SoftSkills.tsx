@@ -4,7 +4,7 @@ export default function SoftSkills() {
   return (
     <section className="max-w-2xl mb-16">
       <div className="mb-8">
-        <h2 className="text-4xl mb-4 font-bold tracking-tight">Soft Skills</h2>
+        <h2 className="font-incognito text-4xl mb-4 font-bold tracking-tight">Soft Skills</h2>
         <p className="dark:text-zinc-400 text-zinc-600 max-w-xl">
           Certain skills I’ve developed along the way that deserve mentioning:
         </p>

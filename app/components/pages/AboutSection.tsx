@@ -11,12 +11,14 @@ import { profile } from "../../data/portfolio";
 
 export default function AboutSection() {
   return (
-    <section id="about" className="relative lg:max-w-7xl mx-auto max-w-3xl md:px-16 px-6 pt-32 pb-16">
-      <div className="mb-16">
-        <h2 className="font-incognito text-4xl mb-4 font-bold tracking-tight">
-          About Me
-        </h2>
-      </div>
+    <section id="about" className="relative mt-32">
+      <Slide delay={0.16}>
+        <div className="mb-16">
+          <h2 className="font-incognito text-4xl mb-4 font-bold tracking-tight">
+            About Me
+          </h2>
+        </div>
+      </Slide>
       <div>
         <div className="relative grid lg:grid-cols-custom grid-cols-1 gap-x-6 justify-items-center">
           <div className="order-2 lg:order-none">

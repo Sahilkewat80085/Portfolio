@@ -38,20 +38,22 @@ export default function ContactSection() {
   }
 
   return (
-    <section id="contact" className="max-w-7xl mx-auto md:px-16 px-6 pt-32 pb-16 no-scrollbar overflow-hidden">
+    <section id="contact" className="mt-32 no-scrollbar overflow-hidden">
+      <Slide delay={0.16}>
+        <div className="mb-16">
+          <h2 className="font-incognito text-4xl mb-4 font-bold tracking-tight">
+            Contact Me
+          </h2>
+          <p className="max-w-2xl text-base dark:text-zinc-400 text-zinc-600 leading-relaxed">
+            I&apos;m always open to discussing new projects, creative ideas, or opportunities to be part of your visions. Feel free to reach out through any of the channels below!
+          </p>
+        </div>
+      </Slide>
+
       <div className="grid lg:grid-cols-2 grid-cols-1 gap-x-20 gap-y-12">
         <div className="flex flex-col gap-y-8">
-          <Slide>
-            <h2 className="font-incognito font-semibold tracking-tight text-3xl sm:text-5xl mb-6 lg:leading-[3.7rem] leading-tight">
-              Contact Me
-            </h2>
-            <p className="text-base dark:text-zinc-400 text-zinc-600 leading-relaxed max-w-xl">
-              I&apos;m always open to discussing new projects, creative ideas, or opportunities to be part of your visions. Feel free to reach out through any of the channels below!
-            </p>
-          </Slide>
-
           <Slide delay={0.1}>
-            <div className="flex flex-col gap-y-8 mt-4">
+            <div className="flex flex-col gap-y-8">
               <div className="flex flex-col gap-y-4">
                 <h3 className="text-2xl font-bold tracking-tight">Contact Information</h3>
                 <div className="flex flex-col gap-y-4">
