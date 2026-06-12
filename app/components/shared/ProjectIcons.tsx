@@ -200,6 +200,57 @@ export function OrqestraIcon({ className = "w-6 h-6" }: IconProps) {
   );
 }
 
+// 7. CreatorJoy: AI-Powered Video Intelligence Platform
+// Design: A play button nested inside a generative RAG node network.
+export function CreatorJoyIcon({ className = "w-6 h-6" }: IconProps) {
+  return (
+    <svg
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="2"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      className={className}
+    >
+      {/* Video screen border */}
+      <rect x="2" y="3" width="20" height="14" rx="2" ry="2" />
+      {/* Play button inside screen */}
+      <polygon points="10 8 15 11 10 14 10 8" fill="currentColor" />
+      {/* Generative RAG AI node paths radiating underneath */}
+      <path d="M6 21h12" />
+      <path d="M12 17v4" />
+      <circle cx="6" cy="21" r="1" fill="currentColor" />
+      <circle cx="18" cy="21" r="1" fill="currentColor" />
+      <circle cx="12" cy="21" r="1" fill="currentColor" />
+    </svg>
+  );
+}
+
+// 8. The Monitor: AI-Powered Market Intelligence Platform
+// Design: Geopolitical globe coordinates with a rising market trend line.
+export function TheMonitorIcon({ className = "w-6 h-6" }: IconProps) {
+  return (
+    <svg
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="2"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      className={className}
+    >
+      {/* Global longitude / latitude circle */}
+      <circle cx="12" cy="12" r="10" />
+      <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z" />
+      <path d="M2 12h20" />
+      {/* Rising overlay market trend line (monitoring/market context) */}
+      <path d="M8 14l3-3 3 2 4-4" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" />
+      <circle cx="18" cy="9" r="1" fill="currentColor" />
+    </svg>
+  );
+}
+
 type ProjectIconProps = {
   name: string;
   className?: string;
@@ -214,6 +265,8 @@ export function ProjectIcon({ name, className }: ProjectIconProps) {
     nyayasetu: NyayaSetuIcon,
     bloodcall: BloodCallIcon,
     orqestra: OrqestraIcon,
+    creatorjoy: CreatorJoyIcon,
+    "the-monitor": TheMonitorIcon,
   };
 
   const SelectedIcon = iconMap[name.toLowerCase()];

@@ -313,6 +313,72 @@ export const projects: PortfolioProject[] = [
     ],
     screenshots: ["/projects/orqestra/ss1.png", "/projects/orqestra/ss2.png"],
   },
+  {
+    id: "project-7",
+    slug: "creatorjoy",
+    name: "CreatorJoy",
+    tagline: "AI-Powered Video Intelligence Platform",
+    projectUrl: "",
+    repository: "https://github.com/Sahilkewat80085/creatorjoy-video-intelligence-rag",
+    logo: "creatorjoy",
+    coverImage: "/projects/creatorjoy/ss1.png",
+    description: [
+      "CreatorJoy is a cloud-native AI platform designed to help creators, marketers, researchers, and analysts understand video performance without manually reviewing metrics and content.",
+      "The platform automatically ingests social media videos, extracts structured metadata, stores contextual information in a vector database, and enables users to ask natural language questions about the videos.",
+      "Using a LangGraph-powered orchestration layer, Qdrant vector search, and Gemini reasoning capabilities, CreatorJoy can identify creators, compare engagement performance, analyze video characteristics, and provide citation-backed responses.",
+      "The system is built around a Retrieval-Augmented Generation architecture, ensuring responses remain grounded in retrieved video data rather than relying solely on model knowledge."
+    ],
+    techStack: [
+      "Next.js",
+      "TypeScript",
+      "Tailwind CSS",
+      "FastAPI",
+      "Python",
+      "Google Gemini",
+      "LangGraph",
+      "Sentence Transformers",
+      "RAG",
+      "Qdrant Cloud",
+      "Vector Embeddings",
+      "Railway",
+      "Vercel",
+      "Docker",
+      "Apify"
+    ],
+    screenshots: ["/projects/creatorjoy/ss1.png", "/projects/creatorjoy/ss2.png"],
+  },
+  {
+    id: "project-8",
+    slug: "the-monitor",
+    name: "The Monitor",
+    tagline: "AI-Powered Market Intelligence Platform",
+    projectUrl: "",
+    repository: "https://github.com/Sahilkewat80085/The-Moniter",
+    logo: "the-monitor",
+    coverImage: "/projects/the-monitor/ss1.png",
+    description: [
+      "The Monitor is a cloud-native intelligence platform designed for traders, investors, researchers, and financial analysts who need to quickly understand the potential market implications of global events.",
+      "The platform continuously ingests news and economic developments from multiple sources, extracts structured event data, identifies historically similar situations using semantic search, and generates probabilistic market impact assessments backed by historical evidence.",
+      "Using an AI-powered event analysis engine, vector retrieval, and contextual reasoning, The Monitor can evaluate the potential effects of events across multiple asset classes including equities, commodities, cryptocurrencies, forex, and indices. Rather than making predictions, the system provides data-driven probabilities based on how markets responded to similar events in the past.",
+      "The platform features a real-time intelligence dashboard, interactive global event visualization, live market monitoring, and conversational analytics, allowing users to explore complex market relationships through a single interface."
+    ],
+    techStack: [
+      "Next.js",
+      "TypeScript",
+      "Tailwind CSS",
+      "Three.js",
+      "React Three Fiber",
+      "Drei",
+      "Google Gemini",
+      "GNews API",
+      "Finnhub API",
+      "Yahoo Finance",
+      "Python",
+      "Vector Search",
+      "OSINT"
+    ],
+    screenshots: ["/projects/the-monitor/ss1.png", "/projects/the-monitor/ss2.png"],
+  },
 ];
 
 
