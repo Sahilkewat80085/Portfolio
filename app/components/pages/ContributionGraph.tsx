@@ -255,8 +255,8 @@ export default function ContributionGraph() {
             ) : null}
 
             <p className="mt-3 text-[11px] text-zinc-500 dark:text-zinc-400">
-              * the above graph represent the github and leetcode contribution
-              of this year
+              * The above graph represents the GitHub and LeetCode contributions
+              for this year.
             </p>
           </>
         ) : (

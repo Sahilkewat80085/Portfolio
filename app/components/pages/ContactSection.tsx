@@ -45,7 +45,7 @@ export default function ContactSection() {
             Contact Me
           </h2>
           <p className="max-w-2xl text-base dark:text-zinc-400 text-zinc-600 leading-relaxed">
-            I&apos;m always open to discussing new projects, creative ideas, or opportunities to be part of your visions. Feel free to reach out through any of the channels below!
+            I&apos;m always open to discussing new projects, creative ideas, or opportunities to be part of your vision. Feel free to reach out through any of the channels below!
           </p>
         </div>
       </Slide>
