@@ -139,7 +139,7 @@ export const jobs: PortfolioJob[] = [
     url: "#",
     logo: "/Abhyuday_logo.jpeg",
     description:
-      "Led the team through aBAJA 2025, overseeing Integration of all sub systems, team coordination, and strategic planning.",
+      "Led the team through BAJA 2025, overseeing integration of all subsystems, team coordination, and strategic planning.",
     startDate: "2025-07-01",
     endDate: "2025-10-31",
   },
