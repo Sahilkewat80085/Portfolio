@@ -19,6 +19,34 @@ export const Slide = ({ children, className, delay }: SlideProps) => {
     }
   }, [controls, isInview]);
 
+  useEffect(() => {
+    // Failsafe 1: Check if the element is in the viewport immediately on client-side mount
+    if (ref.current) {
+      const rect = ref.current.getBoundingClientRect();
+      const inViewport =
+        rect.top < (typeof window !== "undefined" ? window.innerHeight : 800) &&
+        rect.bottom > 0;
+      if (inViewport) {
+        controls.start("stop");
+      }
+    }
+
+    // Failsafe 2: Check after a short layout settling delay to prevent hydration mismatches
+    const timer = setTimeout(() => {
+      if (ref.current) {
+        const rect = ref.current.getBoundingClientRect();
+        const inViewport =
+          rect.top < (typeof window !== "undefined" ? window.innerHeight : 800) &&
+          rect.bottom > 0;
+        if (inViewport) {
+          controls.start("stop");
+        }
+      }
+    }, 150);
+
+    return () => clearTimeout(timer);
+  }, [controls]);
+
   return (
     <motion.div
       ref={ref}
