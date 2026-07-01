@@ -3,6 +3,7 @@
 import { useState, useEffect } from "react";
 import Image from "next/image";
 import { Slide } from "../../animation/Slide";
+import { motion, AnimatePresence } from "framer-motion";
 import { PortfolioProject } from "@/app/data/portfolio";
 import { BiLinkExternal, BiLogoGithub, BiX } from "react-icons/bi";
 import { ProjectIcon } from "../shared/ProjectIcons";
@@ -158,32 +159,42 @@ export default function ProjectList({ projects }: Props) {
           </div>
         </div>
       )}
-      {zoomedImage && (
-        <div
-          className="fixed inset-0 z-[110] flex items-center justify-center p-4 bg-black/80 backdrop-blur-sm cursor-zoom-out transition-opacity duration-300"
-          onClick={() => setZoomedImage(null)}
-        >
-          <div 
-            onClick={(e) => e.stopPropagation()}
-            className="relative w-[90vw] md:w-[50vw] max-h-[80vh] overflow-hidden rounded-xl border border-zinc-800 bg-zinc-950/80 shadow-2xl flex items-center justify-center group"
+      <AnimatePresence>
+        {zoomedImage && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.2 }}
+            className="fixed inset-0 z-[110] flex items-center justify-center p-4 bg-black/85 backdrop-blur-md cursor-zoom-out"
+            onClick={() => setZoomedImage(null)}
           >
-            <button
-              onClick={() => setZoomedImage(null)}
-              className="absolute top-4 right-4 z-10 p-1.5 rounded-full bg-black/60 text-white border border-zinc-800 hover:bg-black/80 transition-colors duration-300 cursor-pointer"
+            <motion.div 
+              initial={{ scale: 0.95, opacity: 0 }}
+              animate={{ scale: 1, opacity: 1 }}
+              exit={{ scale: 0.95, opacity: 0 }}
+              transition={{ type: "spring", duration: 0.3 }}
+              onClick={(e) => e.stopPropagation()}
+              className="relative w-[90vw] md:w-[50vw] max-h-[80vh] overflow-hidden rounded-xl border border-zinc-800 bg-zinc-950/80 shadow-2xl flex items-center justify-center group"
             >
-              <BiX className="text-xl" />
-            </button>
-            <Image
-              src={zoomedImage}
-              alt="Project screenshot zoom"
-              width={1920}
-              height={1080}
-              className="w-full h-auto max-h-[80vh] object-contain select-none"
-              priority
-            />
-          </div>
-        </div>
-      )}
+              <button
+                onClick={() => setZoomedImage(null)}
+                className="absolute top-4 right-4 z-10 p-1.5 rounded-full bg-black/60 text-white border border-zinc-800 hover:bg-black/80 transition-colors duration-300 cursor-pointer"
+              >
+                <BiX className="text-xl" />
+              </button>
+              <Image
+                src={zoomedImage}
+                alt="Project screenshot zoom"
+                width={1920}
+                height={1080}
+                className="w-full h-auto max-h-[80vh] object-contain select-none"
+                priority
+              />
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </>
   );
 }
