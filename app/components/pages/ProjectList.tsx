@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Image from "next/image";
 import { Slide } from "../../animation/Slide";
 import { PortfolioProject } from "@/app/data/portfolio";
@@ -16,6 +16,24 @@ export default function ProjectList({ projects }: Props) {
     null
   );
   const [zoomedImage, setZoomedImage] = useState<string | null>(null);
+
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === "Escape") {
+        setZoomedImage(null);
+      }
+    };
+    if (zoomedImage) {
+      window.addEventListener("keydown", handleKeyDown);
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "";
+    }
+    return () => {
+      window.removeEventListener("keydown", handleKeyDown);
+      document.body.style.overflow = "";
+    };
+  }, [zoomedImage]);
 
   return (
     <>
@@ -147,8 +165,14 @@ export default function ProjectList({ projects }: Props) {
         >
           <div 
             onClick={(e) => e.stopPropagation()}
-            className="relative w-[90vw] md:w-[50vw] max-h-[80vh] overflow-hidden rounded-xl border border-zinc-800 bg-zinc-950/80 shadow-2xl flex items-center justify-center"
+            className="relative w-[90vw] md:w-[50vw] max-h-[80vh] overflow-hidden rounded-xl border border-zinc-800 bg-zinc-950/80 shadow-2xl flex items-center justify-center group"
           >
+            <button
+              onClick={() => setZoomedImage(null)}
+              className="absolute top-4 right-4 z-10 p-1.5 rounded-full bg-black/60 text-white border border-zinc-800 hover:bg-black/80 transition-colors duration-300 cursor-pointer"
+            >
+              <BiX className="text-xl" />
+            </button>
             <Image
               src={zoomedImage}
               alt="Project screenshot zoom"
