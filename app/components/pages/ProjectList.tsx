@@ -140,6 +140,20 @@ export default function ProjectList({ projects }: Props) {
           </div>
         </div>
       )}
+      {zoomedImage && (
+        <div
+          className="fixed inset-0 z-[110] flex items-center justify-center p-4 bg-black/80 backdrop-blur-sm cursor-zoom-out transition-opacity duration-300"
+          onClick={() => setZoomedImage(null)}
+        >
+          <div 
+            onClick={(e) => e.stopPropagation()}
+            className="relative max-w-4xl max-h-[85vh] overflow-hidden rounded-xl border border-zinc-800 bg-zinc-950/50 shadow-2xl flex items-center justify-center"
+          >
+            {/* Image content will be added in Stage 3 */}
+            <span className="text-zinc-500 p-8 text-sm">Loading screenshot...</span>
+          </div>
+        </div>
+      )}
     </>
   );
 }
