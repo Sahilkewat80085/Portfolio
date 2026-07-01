@@ -147,10 +147,16 @@ export default function ProjectList({ projects }: Props) {
         >
           <div 
             onClick={(e) => e.stopPropagation()}
-            className="relative max-w-4xl max-h-[85vh] overflow-hidden rounded-xl border border-zinc-800 bg-zinc-950/50 shadow-2xl flex items-center justify-center"
+            className="relative w-[90vw] md:w-[50vw] max-h-[80vh] overflow-hidden rounded-xl border border-zinc-800 bg-zinc-950/80 shadow-2xl flex items-center justify-center"
           >
-            {/* Image content will be added in Stage 3 */}
-            <span className="text-zinc-500 p-8 text-sm">Loading screenshot...</span>
+            <Image
+              src={zoomedImage}
+              alt="Project screenshot zoom"
+              width={1920}
+              height={1080}
+              className="w-full h-auto max-h-[80vh] object-contain select-none"
+              priority
+            />
           </div>
         </div>
       )}
