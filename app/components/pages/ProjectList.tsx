@@ -15,6 +15,7 @@ export default function ProjectList({ projects }: Props) {
   const [selectedProject, setSelectedProject] = useState<PortfolioProject | null>(
     null
   );
+  const [zoomedImage, setZoomedImage] = useState<string | null>(null);
 
   return (
     <>
