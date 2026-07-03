@@ -109,13 +109,14 @@ export default function ProjectList({ projects }: Props) {
                 {selectedProject.screenshots.map((ss, index) => (
                   <div
                     key={index}
-                    className="relative aspect-video rounded-lg overflow-hidden border dark:border-zinc-800 border-zinc-100"
+                    onClick={() => setZoomedImage(ss)}
+                    className="relative aspect-video rounded-lg overflow-hidden border dark:border-zinc-800 border-zinc-100 cursor-zoom-in hover:scale-[1.02] hover:opacity-95 transition-all duration-300 group/image"
                   >
                     <Image
                       src={ss}
                       alt={`${selectedProject.name} screenshot ${index + 1}`}
                       fill
-                      className={`object-cover ${
+                      className={`object-cover duration-300 group-hover/image:scale-105 ${
                         selectedProject.slug === "bloodcall" && index === 1
                           ? "object-[center_10%]"
                           : "object-center"
