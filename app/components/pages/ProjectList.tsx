@@ -6,6 +6,7 @@ import { Slide } from "../../animation/Slide";
 import { PortfolioProject } from "@/app/data/portfolio";
 import { BiLinkExternal, BiLogoGithub, BiX } from "react-icons/bi";
 import { ProjectIcon } from "../shared/ProjectIcons";
+import { motion, AnimatePresence } from "framer-motion";
 
 type Props = {
   projects: PortfolioProject[];
@@ -159,32 +160,46 @@ export default function ProjectList({ projects }: Props) {
         </div>
       )}
       {/* Lightbox Backdrop Overlay */}
-      {zoomedImage && (
-        <div
-          className="fixed inset-0 z-[110] flex items-center justify-center p-4 bg-black/80 backdrop-blur-sm"
-          onClick={() => setZoomedImage(null)}
-        >
-          <button
+      <AnimatePresence>
+        {zoomedImage && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.2 }}
+            className="fixed inset-0 z-[110] flex items-center justify-center p-4 bg-black/80 backdrop-blur-sm"
             onClick={() => setZoomedImage(null)}
-            className="absolute top-6 right-6 p-2 rounded-full bg-black/40 hover:bg-black/70 text-white border border-white/10 transition-colors duration-300 z-[120]"
-            aria-label="Close image zoom"
           >
-            <BiX className="text-3xl" />
-          </button>
-          <div 
-            className="relative aspect-video w-[90vw] md:w-[50vw] max-h-[80vh] rounded-lg overflow-hidden border dark:border-zinc-800 border-zinc-200"
-            onClick={(e) => e.stopPropagation()}
-          >
-            <Image
-              src={zoomedImage}
-              alt="Zoomed project screenshot"
-              fill
-              className="object-cover"
-              priority
-            />
-          </div>
-        </div>
-      )}
+            <motion.button
+              initial={{ opacity: 0, scale: 0.8 }}
+              animate={{ opacity: 1, scale: 1 }}
+              exit={{ opacity: 0, scale: 0.8 }}
+              transition={{ duration: 0.2 }}
+              onClick={() => setZoomedImage(null)}
+              className="absolute top-6 right-6 p-2 rounded-full bg-black/40 hover:bg-black/70 text-white border border-white/10 transition-colors duration-300 z-[120]"
+              aria-label="Close image zoom"
+            >
+              <BiX className="text-3xl" />
+            </motion.button>
+            <motion.div
+              initial={{ scale: 0.95, opacity: 0 }}
+              animate={{ scale: 1, opacity: 1 }}
+              exit={{ scale: 0.95, opacity: 0 }}
+              transition={{ type: "spring", stiffness: 300, damping: 25 }}
+              className="relative aspect-video w-[90vw] md:w-[50vw] max-h-[80vh] rounded-lg overflow-hidden border dark:border-zinc-800 border-zinc-200"
+              onClick={(e) => e.stopPropagation()}
+            >
+              <Image
+                src={zoomedImage}
+                alt="Zoomed project screenshot"
+                fill
+                className="object-cover"
+                priority
+              />
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </>
   );
 }
