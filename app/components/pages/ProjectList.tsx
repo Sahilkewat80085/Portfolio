@@ -140,6 +140,17 @@ export default function ProjectList({ projects }: Props) {
           </div>
         </div>
       )}
+      {/* Lightbox Backdrop Overlay */}
+      {zoomedImage && (
+        <div
+          className="fixed inset-0 z-[110] flex items-center justify-center p-4 bg-black/80 backdrop-blur-sm"
+          onClick={() => setZoomedImage(null)}
+        >
+          <div className="relative">
+            {/* Screenshot image placeholder */}
+          </div>
+        </div>
+      )}
     </>
   );
 }
