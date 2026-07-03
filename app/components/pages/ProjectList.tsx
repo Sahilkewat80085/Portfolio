@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Image from "next/image";
 import { Slide } from "../../animation/Slide";
 import { PortfolioProject } from "@/app/data/portfolio";
@@ -16,6 +16,24 @@ export default function ProjectList({ projects }: Props) {
     null
   );
   const [zoomedImage, setZoomedImage] = useState<string | null>(null);
+
+  useEffect(() => {
+    if (!zoomedImage) return;
+
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === "Escape") {
+        setZoomedImage(null);
+      }
+    };
+
+    document.body.style.overflow = "hidden";
+    window.addEventListener("keydown", handleKeyDown);
+
+    return () => {
+      document.body.style.overflow = "";
+      window.removeEventListener("keydown", handleKeyDown);
+    };
+  }, [zoomedImage]);
 
   return (
     <>
@@ -146,6 +164,13 @@ export default function ProjectList({ projects }: Props) {
           className="fixed inset-0 z-[110] flex items-center justify-center p-4 bg-black/80 backdrop-blur-sm"
           onClick={() => setZoomedImage(null)}
         >
+          <button
+            onClick={() => setZoomedImage(null)}
+            className="absolute top-6 right-6 p-2 rounded-full bg-black/40 hover:bg-black/70 text-white border border-white/10 transition-colors duration-300 z-[120]"
+            aria-label="Close image zoom"
+          >
+            <BiX className="text-3xl" />
+          </button>
           <div 
             className="relative aspect-video w-[90vw] md:w-[50vw] max-h-[80vh] rounded-lg overflow-hidden border dark:border-zinc-800 border-zinc-200"
             onClick={(e) => e.stopPropagation()}
