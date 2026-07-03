@@ -146,8 +146,17 @@ export default function ProjectList({ projects }: Props) {
           className="fixed inset-0 z-[110] flex items-center justify-center p-4 bg-black/80 backdrop-blur-sm"
           onClick={() => setZoomedImage(null)}
         >
-          <div className="relative">
-            {/* Screenshot image placeholder */}
+          <div 
+            className="relative aspect-video w-[90vw] md:w-[50vw] max-h-[80vh] rounded-lg overflow-hidden border dark:border-zinc-800 border-zinc-200"
+            onClick={(e) => e.stopPropagation()}
+          >
+            <Image
+              src={zoomedImage}
+              alt="Zoomed project screenshot"
+              fill
+              className="object-cover"
+              priority
+            />
           </div>
         </div>
       )}
