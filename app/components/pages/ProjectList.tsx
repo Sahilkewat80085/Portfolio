@@ -135,6 +135,7 @@ export default function ProjectList({ projects }: Props) {
                       src={ss}
                       alt={`${selectedProject.name} screenshot ${index + 1}`}
                       fill
+                      sizes="(max-width: 768px) 100vw, 450px"
                       className={`object-cover duration-300 group-hover/image:scale-105 ${
                         selectedProject.slug === "bloodcall" && index === 1
                           ? "object-[center_10%]"
@@ -193,6 +194,7 @@ export default function ProjectList({ projects }: Props) {
                 src={zoomedImage}
                 alt="Zoomed project screenshot"
                 fill
+                sizes="(max-width: 768px) 90vw, 50vw"
                 className="object-cover"
                 priority
               />
