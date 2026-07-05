@@ -80,9 +80,6 @@ const WalkingSprite = () => {
   const [walkDuration, setWalkDuration] = useState(0);
 
   const posXRef = useRef(20);
-  const targetXRef = useRef<number | null>(null);
-  const rafRef = useRef<number | null>(null);
-  const lastTimeRef = useRef<number | null>(null);
   const dialogRef = useRef<HTMLDivElement>(null);
   const messageIndexRef = useRef(1); // skip intro (index 0)
 
@@ -149,40 +146,20 @@ const WalkingSprite = () => {
     return minX + Math.random() * (maxX - minX);
   }, []);
 
-  // ─── rAF walk to a target ──────────────────────────────────────────────────
+  // ─── CSS transition walk to a target ───────────────────────────────────────
   const startWalking = useCallback((target: number) => {
-    targetXRef.current = target;
-    lastTimeRef.current = null;
+    const currentX = posXRef.current;
+    const distance = Math.abs(target - currentX);
+    const duration = distance / SPEED;
+
+    setDirection(target > currentX ? "right" : "left");
+    setWalkDuration(duration);
     setIsWalking(true);
-    if (rafRef.current) cancelAnimationFrame(rafRef.current);
 
-    const animate = (time: number) => {
-      if (lastTimeRef.current === null) lastTimeRef.current = time;
-      const dt = (time - lastTimeRef.current) / 1000;
-      lastTimeRef.current = time;
+    posXRef.current = target;
+    setPosX(target);
 
-      const tgt = targetXRef.current!;
-      const cur = posXRef.current;
-      const dist = tgt - cur;
-      const step = SPEED * dt;
-
-      if (Math.abs(dist) <= step) {
-        posXRef.current = tgt;
-        setPosX(tgt);
-        targetXRef.current = null;
-        setIsWalking(false);
-        setDirection("down"); // face the user when idle
-        return;
-      }
-
-      const newX = cur + Math.sign(dist) * step;
-      posXRef.current = newX;
-      setPosX(newX);
-      setDirection(dist > 0 ? "right" : "left");
-      rafRef.current = requestAnimationFrame(animate);
-    };
-
-    rafRef.current = requestAnimationFrame(animate);
+    return duration;
   }, []);
 
   // ─── Intro greeting ────────────────────────────────────────────────────────
@@ -199,15 +176,6 @@ const WalkingSprite = () => {
     const sleep = (ms: number) =>
       new Promise<void>((r) => setTimeout(r, ms));
 
-    const waitArrived = () =>
-      new Promise<void>((r) => {
-        const check = () => {
-          if (targetXRef.current === null) return r();
-          setTimeout(check, 50);
-        };
-        check();
-      });
-
     const run = async () => {
       await sleep(600);
       posXRef.current = 20;
@@ -220,8 +188,8 @@ const WalkingSprite = () => {
       while (!cancelled) {
         // Walk to a random position
         const target = getRandomX();
-        startWalking(target);
-        await waitArrived();
+        const duration = startWalking(target);
+        await sleep(duration * 1000);
         if (cancelled) break;
 
         // She arrived and is facing the user – show a dialog
@@ -229,6 +197,8 @@ const WalkingSprite = () => {
         setMessage(MESSAGES[idx]);
 
         // Stand still while speaking (5 seconds)
+        setIsWalking(false);
+        setDirection("down"); // face the user when idle
         const standDuration = 5000;
         await sleep(standDuration);
         if (cancelled) break;
@@ -243,7 +213,6 @@ const WalkingSprite = () => {
     run();
     return () => {
       cancelled = true;
-      if (rafRef.current) cancelAnimationFrame(rafRef.current);
     };
   }, [getRandomX, startWalking]);
 
@@ -259,6 +228,7 @@ const WalkingSprite = () => {
           bottom: 20,
           left: 0,
           transform: `translateX(${posX}px)`,
+          transition: isWalking ? `transform ${walkDuration}s linear` : "none",
           width: SPRITE_SIZE,
           height: SPRITE_SIZE,
           zIndex: 100,
