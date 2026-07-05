@@ -24,6 +24,7 @@ h4 {
 .path {
   stroke-dasharray: 500px 100px;
   animation: animate 100s linear infinite alternate-reverse;
+  will-change: stroke-dashoffset;
 }
 
 @keyframes animate {

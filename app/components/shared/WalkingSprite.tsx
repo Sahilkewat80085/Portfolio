@@ -225,6 +225,7 @@ const WalkingSprite = () => {
           zIndex: 100,
           pointerEvents: "auto",
           cursor: "pointer",
+          willChange: "transform",
         }}
       >
       {/* Dialog bubble */}

@@ -30,7 +30,6 @@ export const Slide = ({ children, className, delay }: SlideProps) => {
         ease: "easeInOut",
         duration: 0.3,
         delay: delay,
-        stiffness: 0.5,
       }}
       animate={controls}
       initial="start"
