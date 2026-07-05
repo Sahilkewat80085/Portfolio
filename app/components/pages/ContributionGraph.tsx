@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useState, useMemo } from "react";
 
 type ActivityDay = {
   date: string;
@@ -112,26 +112,28 @@ export default function ContributionGraph() {
     };
   }, []);
 
-  const days = data?.days ?? [];
-  const weeks = chunkWeeks(days);
+  const days = useMemo(() => data?.days ?? [], [data?.days]);
+  const weeks = useMemo(() => chunkWeeks(days), [days]);
   const summary = data?.summary;
-  const monthColumns = weeks.map((week, weekIndex) => {
-    const firstDay = week.find(Boolean);
-    const monthLabel = firstDay
-      ? monthFormatter.format(new Date(firstDay.date))
-      : "";
-    const previousFirstDay =
-      weekIndex > 0 ? weeks[weekIndex - 1].find(Boolean) : null;
-    const previousMonthLabel = previousFirstDay
-      ? monthFormatter.format(new Date(previousFirstDay.date))
-      : "";
+  const monthColumns = useMemo(() => {
+    return weeks.map((week, weekIndex) => {
+      const firstDay = week.find(Boolean);
+      const monthLabel = firstDay
+        ? monthFormatter.format(new Date(firstDay.date))
+        : "";
+      const previousFirstDay =
+        weekIndex > 0 ? weeks[weekIndex - 1].find(Boolean) : null;
+      const previousMonthLabel = previousFirstDay
+        ? monthFormatter.format(new Date(previousFirstDay.date))
+        : "";
 
-    return {
-      key: `${weekIndex}-${monthLabel}`,
-      label:
-        weekIndex === 0 || monthLabel !== previousMonthLabel ? monthLabel : "",
-    };
-  });
+      return {
+        key: `${weekIndex}-${monthLabel}`,
+        label:
+          weekIndex === 0 || monthLabel !== previousMonthLabel ? monthLabel : "",
+      };
+    });
+  }, [weeks]);
 
   return (
     <div className="dark:bg-primary-bg bg-secondary-bg border dark:border-zinc-800 border-zinc-200 p-6 rounded-lg w-full overflow-x-auto">
