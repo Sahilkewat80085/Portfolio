@@ -105,15 +105,6 @@ const WalkingSprite = () => {
     }
   }, [message]);
 
-  // Also keep dialog width up to date while she moves
-  useEffect(() => {
-    if (!message) return;
-    const iv = setInterval(() => {
-      if (dialogRef.current) setDialogWidth(dialogRef.current.offsetWidth);
-    }, 80);
-    return () => clearInterval(iv);
-  }, [message]);
-
   // ─── Clamped dialog left (in px, relative to sprite div) ──────────────────
   const computeDialogLeft = (x: number, dw: number): string => {
     if (dw === 0) return "-9999px";
