@@ -77,6 +77,7 @@ const WalkingSprite = () => {
   const [message, setMessage] = useState<string | null>(null);
   const [dialogWidth, setDialogWidth] = useState(0);
   const [showEasterEgg, setShowEasterEgg] = useState(false);
+  const [walkDuration, setWalkDuration] = useState(0);
 
   const posXRef = useRef(20);
   const targetXRef = useRef<number | null>(null);
@@ -256,7 +257,8 @@ const WalkingSprite = () => {
         style={{
           position: "fixed",
           bottom: 20,
-          left: posX,
+          left: 0,
+          transform: `translateX(${posX}px)`,
           width: SPRITE_SIZE,
           height: SPRITE_SIZE,
           zIndex: 100,
