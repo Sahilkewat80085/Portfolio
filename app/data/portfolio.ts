@@ -129,7 +129,7 @@ export const jobs: PortfolioJob[] = [
     logo: "/gaotek_logo.png",
     description:
       "Responsible for AI engineering chores such as building a RAG pipeline and setting up continuous integration for it.",
-    startDate: "2026-06-01",
+    startDate: "2026-05-01",
   },
   {
     id: "job-1",
