@@ -112,6 +112,15 @@ export const profile: PortfolioProfile = {
 
 export const jobs: PortfolioJob[] = [
   {
+    id: "job-5",
+    name: "Pitchmatter",
+    jobTitle: "Software Engineer",
+    url: "#",
+    logo: "/pitchmatter_logo.png",
+    description: "",
+    startDate: "2026-07-01",
+  },
+  {
     id: "job-4",
     name: "GaoTek Inc",
     jobTitle: "AI Engineer",
