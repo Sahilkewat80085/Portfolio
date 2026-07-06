@@ -117,7 +117,8 @@ export const jobs: PortfolioJob[] = [
     jobTitle: "Software Engineer",
     url: "#",
     logo: "/pitchmatter_logo.png",
-    description: "",
+    description:
+      "Responsible for developing and scaling full-stack applications, optimizing data workflows, and implementing interactive UI components using modern frontend and backend frameworks.",
     startDate: "2026-07-01",
   },
   {
