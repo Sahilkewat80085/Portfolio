@@ -13,11 +13,19 @@ export default function RefLink({
   className?: string;
   target?: HTMLAttributeAnchorTarget;
 }) {
+  const isHash = typeof href === "string" && (href === "#" || href.startsWith("#"));
+  const resolvedTarget = isHash ? undefined : target;
+  const resolvedRel = isHash
+    ? undefined
+    : resolvedTarget === "_blank"
+    ? "noopener noreferrer"
+    : "noopener";
+
   return (
     <Link
       href={href}
-      rel="noopener"
-      target={target}
+      rel={resolvedRel}
+      target={resolvedTarget}
       className={className}
     >
       {children}
