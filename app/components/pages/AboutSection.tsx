@@ -35,7 +35,7 @@ export default function AboutSection() {
             </Slide>
           </div>
 
-          <aside className="flex flex-col lg:justify-self-center justify-self-start gap-y-8 lg:order-1 order-none mb-12">
+          <aside className="flex flex-col lg:justify-self-center justify-self-center gap-y-8 lg:order-1 order-none mb-12">
             <Slide delay={0.1}>
               <div className="sticky top-10">
                 <HeroSvg />
