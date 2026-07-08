@@ -19,11 +19,15 @@ export default function ProjectList({ projects }: Props) {
   const [zoomedImage, setZoomedImage] = useState<string | null>(null);
 
   useEffect(() => {
-    if (!zoomedImage) return;
+    if (!selectedProject && !zoomedImage) return;
 
     const handleKeyDown = (e: KeyboardEvent) => {
       if (e.key === "Escape") {
-        setZoomedImage(null);
+        if (zoomedImage) {
+          setZoomedImage(null);
+        } else {
+          setSelectedProject(null);
+        }
       }
     };
 
@@ -34,7 +38,7 @@ export default function ProjectList({ projects }: Props) {
       document.body.style.overflow = "";
       window.removeEventListener("keydown", handleKeyDown);
     };
-  }, [zoomedImage]);
+  }, [selectedProject, zoomedImage]);
 
   return (
     <>
