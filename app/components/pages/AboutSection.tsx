@@ -11,7 +11,7 @@ import { profile } from "../../data/portfolio";
 
 export default function AboutSection() {
   return (
-    <section id="about" className="relative lg:max-w-7xl mx-auto max-w-3xl md:px-16 px-6 pt-32 pb-16">
+    <section id="about" className="relative lg:max-w-7xl mx-auto max-w-3xl md:px-16 px-6 lg:pt-32 pt-20 lg:pb-16 pb-10">
       <div className="mb-16">
         <h2 className="font-incognito text-4xl mb-4 font-bold tracking-tight">
           About Me

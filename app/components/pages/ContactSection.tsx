@@ -38,7 +38,7 @@ export default function ContactSection() {
   }
 
   return (
-    <section id="contact" className="max-w-7xl mx-auto md:px-16 px-6 pt-32 pb-16 no-scrollbar overflow-hidden">
+    <section id="contact" className="max-w-7xl mx-auto md:px-16 px-6 lg:pt-32 pt-20 lg:pb-16 pb-10 no-scrollbar overflow-hidden">
       <div className="grid lg:grid-cols-2 grid-cols-1 gap-x-20 gap-y-12">
         <div className="flex flex-col gap-y-8">
           <Slide>

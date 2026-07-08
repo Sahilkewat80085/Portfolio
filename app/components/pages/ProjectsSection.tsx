@@ -8,7 +8,7 @@ import { projects } from "../../data/portfolio";
 
 export default function ProjectsSection() {
   return (
-    <section id="projects" className="max-w-7xl mx-auto md:px-16 px-6 pt-32 pb-16">
+    <section id="projects" className="max-w-7xl mx-auto md:px-16 px-6 lg:pt-32 pt-20 lg:pb-16 pb-10">
       <PageHeading
         title="Projects"
         description="I've worked on tons of little projects over the years but these are the ones that I'm most proud of. Many of them are open-source, so if you see something that piques your interest, check out the code and contribute if you have ideas on how it can be improved."
