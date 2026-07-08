@@ -81,7 +81,7 @@ export default function ContactSection() {
           <div className="relative h-full">
             <form 
               onSubmit={handleSubmit}
-              className={`flex flex-col gap-y-6 dark:bg-primary-bg bg-zinc-50 border dark:border-zinc-800 border-zinc-200 p-8 rounded-2xl h-full justify-center duration-300 ${status === "success" ? "opacity-0 pointer-events-none" : "opacity-100"}`}
+              className={`flex flex-col gap-y-6 dark:bg-primary-bg bg-zinc-50 border dark:border-zinc-800 border-zinc-200 p-6 sm:p-8 rounded-2xl h-full justify-center duration-300 ${status === "success" ? "opacity-0 pointer-events-none" : "opacity-100"}`}
             >
               <div className="flex flex-col gap-y-2">
                 <label htmlFor="name" className="text-sm font-bold uppercase tracking-widest dark:text-zinc-400 text-zinc-600">

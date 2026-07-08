@@ -95,7 +95,7 @@ export default function ProjectList({ projects }: Props) {
             </button>
 
             <div className="flex flex-col gap-y-6">
-              <div className="flex flex-col gap-y-2">
+              <div className="flex flex-col gap-y-2 pr-10 md:pr-0">
                 <div className="flex items-center justify-between flex-wrap gap-4">
                   <h2 className="text-2xl md:text-4xl font-black tracking-tight">
                     {selectedProject.name}
