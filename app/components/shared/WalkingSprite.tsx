@@ -78,24 +78,35 @@ const WalkingSprite = () => {
   const [dialogWidth, setDialogWidth] = useState(0);
   const [showEasterEgg, setShowEasterEgg] = useState(false);
   const [walkDuration, setWalkDuration] = useState(0);
+  const [isDesktop, setIsDesktop] = useState(false);
 
   const posXRef = useRef(20);
   const dialogRef = useRef<HTMLDivElement>(null);
   const messageIndexRef = useRef(1); // skip intro (index 0)
 
+  // ─── Desktop Viewport Detection ──────────────────────────────────────────
+  useEffect(() => {
+    const checkDesktop = () => {
+      setIsDesktop(window.innerWidth >= 768);
+    };
+    checkDesktop();
+    window.addEventListener("resize", checkDesktop);
+    return () => window.removeEventListener("resize", checkDesktop);
+  }, []);
+
   // ─── Frame ticker (only animate when walking) ──────────────────────────────
   useEffect(() => {
-    if (!isWalking) {
+    if (!isWalking || !isDesktop) {
       setFrame(0);
       return;
     }
     const iv = setInterval(() => setFrame((p) => (p + 1) % 4), FRAME_INTERVAL);
     return () => clearInterval(iv);
-  }, [isWalking]);
+  }, [isWalking, isDesktop]);
 
   // ─── Measure dialog width whenever message changes ─────────────────────────
   useEffect(() => {
-    if (message) {
+    if (message && isDesktop) {
       const t = setTimeout(() => {
         if (dialogRef.current) setDialogWidth(dialogRef.current.offsetWidth);
       }, 60);
@@ -103,7 +114,7 @@ const WalkingSprite = () => {
     } else {
       setDialogWidth(0);
     }
-  }, [message]);
+  }, [message, isDesktop]);
 
   // ─── Clamped dialog left (in px, relative to sprite div) ──────────────────
   const computeDialogLeft = (x: number, dw: number): string => {
@@ -133,7 +144,7 @@ const WalkingSprite = () => {
   const getRandomX = useCallback(() => {
     const w = window.innerWidth;
     const minX = 20;
-    const maxX = w - SPRITE_SIZE - 20;
+    const maxX = Math.max(minX, w - SPRITE_SIZE - 20);
     return minX + Math.random() * (maxX - minX);
   }, []);
 
@@ -155,13 +166,15 @@ const WalkingSprite = () => {
 
   // ─── Intro greeting ────────────────────────────────────────────────────────
   useEffect(() => {
+    if (!isDesktop) return;
     setMessage(MESSAGES[0]);
     const t = setTimeout(() => setMessage(null), 5000);
     return () => clearTimeout(t);
-  }, []);
+  }, [isDesktop]);
 
   // ─── Walk loop – completely independent of dialogs ─────────────────────────
   useEffect(() => {
+    if (!isDesktop) return;
     let cancelled = false;
 
     const sleep = (ms: number) =>
@@ -205,10 +218,12 @@ const WalkingSprite = () => {
     return () => {
       cancelled = true;
     };
-  }, [getRandomX, startWalking]);
+  }, [isDesktop, getRandomX, startWalking]);
+
+  if (!isDesktop) return null;
 
   return (
-    <>
+    <div className="hidden md:block">
       <div
         onClick={() => {
           setShowEasterEgg(true);
@@ -228,64 +243,64 @@ const WalkingSprite = () => {
           willChange: "transform",
         }}
       >
-      {/* Dialog bubble */}
-      <AnimatePresence>
-        {message && (
-          <motion.div
-            ref={dialogRef}
-            key={message}
-            initial={{ opacity: 0, scale: 0.75 }}
-            animate={{ opacity: 1, scale: 1 }}
-            exit={{ opacity: 0, scale: 0.75 }}
-            transition={{ duration: 0.15 }}
-            style={{
-              position: "absolute",
-              bottom: SPRITE_SIZE + 8,
-              left: computeDialogLeft(posX, dialogWidth),
-              backgroundColor: "white",
-              border: "3px solid black",
-              padding: "6px 10px",
-              color: "black",
-              fontSize: "12px",
-              fontWeight: "700",
-              fontFamily: "monospace",
-              boxShadow: "3px 3px 0px rgba(0,0,0,0.2)",
-              whiteSpace: "nowrap",
-              imageRendering: "pixelated",
-            }}
-          >
-            {message}
-            {/* Pointer triangle */}
-            <div
+        {/* Dialog bubble */}
+        <AnimatePresence>
+          {message && (
+            <motion.div
+              ref={dialogRef}
+              key={message}
+              initial={{ opacity: 0, scale: 0.75 }}
+              animate={{ opacity: 1, scale: 1 }}
+              exit={{ opacity: 0, scale: 0.75 }}
+              transition={{ duration: 0.15 }}
               style={{
                 position: "absolute",
-                bottom: -8,
-                left: computePointerLeft(posX, dialogWidth),
-                transform: "translateX(-50%) rotate(45deg)",
-                width: 12,
-                height: 12,
+                bottom: SPRITE_SIZE + 8,
+                left: computeDialogLeft(posX, dialogWidth),
                 backgroundColor: "white",
-                borderRight: "3px solid black",
-                borderBottom: "3px solid black",
+                border: "3px solid black",
+                padding: "6px 10px",
+                color: "black",
+                fontSize: "12px",
+                fontWeight: "700",
+                fontFamily: "monospace",
+                boxShadow: "3px 3px 0px rgba(0,0,0,0.2)",
+                whiteSpace: "nowrap",
+                imageRendering: "pixelated",
               }}
-            />
-          </motion.div>
-        )}
-      </AnimatePresence>
+            >
+              {message}
+              {/* Pointer triangle */}
+              <div
+                style={{
+                  position: "absolute",
+                  bottom: -8,
+                  left: computePointerLeft(posX, dialogWidth),
+                  transform: "translateX(-50%) rotate(45deg)",
+                  width: 12,
+                  height: 12,
+                  backgroundColor: "white",
+                  borderRight: "3px solid black",
+                  borderBottom: "3px solid black",
+                }}
+              />
+            </motion.div>
+          )}
+        </AnimatePresence>
 
-      {/* Sprite */}
-      <div
-        style={{
-          width: "100%",
-          height: "100%",
-          backgroundImage: `url(${SPRITE_SHEET})`,
-          backgroundSize: `${SPRITE_SIZE * 4}px ${SPRITE_SIZE * 4}px`,
-          backgroundPosition: `-${directionMap[direction] * SPRITE_SIZE}px -${frame * SPRITE_SIZE}px`,
-          imageRendering: "pixelated",
-          filter: "drop-shadow(0 4px 6px rgba(0,0,0,0.15))",
-        }}
-      />
-    </div>
+        {/* Sprite */}
+        <div
+          style={{
+            width: "100%",
+            height: "100%",
+            backgroundImage: `url(${SPRITE_SHEET})`,
+            backgroundSize: `${SPRITE_SIZE * 4}px ${SPRITE_SIZE * 4}px`,
+            backgroundPosition: `-${directionMap[direction] * SPRITE_SIZE}px -${frame * SPRITE_SIZE}px`,
+            imageRendering: "pixelated",
+            filter: "drop-shadow(0 4px 6px rgba(0,0,0,0.15))",
+          }}
+        />
+      </div>
 
       {/* Easter Egg Image */}
       <Image
@@ -299,7 +314,7 @@ const WalkingSprite = () => {
         alt="yeah right"
         style={{ pointerEvents: "none", transitionProperty: "left" }}
       />
-    </>
+    </div>
   );
 };
 
