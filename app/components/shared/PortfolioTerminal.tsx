@@ -116,6 +116,7 @@ export default function PortfolioTerminal() {
   const [open, setOpen] = useState(false);
   const [lines, setLines] = useState<TerminalLine[]>([]);
   const [input, setInput] = useState("");
+  const [cursorPos, setCursorPos] = useState(0);
   const [history, setHistory] = useState<string[]>([]);
   const [historyIdx, setHistoryIdx] = useState(-1);
   const inputRef = useRef<HTMLInputElement>(null);
@@ -123,6 +124,12 @@ export default function PortfolioTerminal() {
 
   const resetTerminal = useCallback(() => {
     setLines(BANNER.map((l) => mkLine("banner", l)));
+  }, []);
+
+  const focusInput = useCallback(() => {
+    if (inputRef.current) {
+      inputRef.current.focus();
+    }
   }, []);
 
   useEffect(() => {
@@ -146,9 +153,20 @@ export default function PortfolioTerminal() {
     bottomRef.current?.scrollIntoView({ behavior: "smooth" });
   }, [lines]);
 
+  // Immediately auto-focus the input as soon as the terminal opens
   useEffect(() => {
-    if (open) setTimeout(() => inputRef.current?.focus(), 80);
-  }, [open]);
+    if (open) {
+      focusInput();
+      const raf = requestAnimationFrame(() => focusInput());
+      const t1 = setTimeout(() => focusInput(), 50);
+      const t2 = setTimeout(() => focusInput(), 150);
+      return () => {
+        cancelAnimationFrame(raf);
+        clearTimeout(t1);
+        clearTimeout(t2);
+      };
+    }
+  }, [open, focusInput]);
 
   const runCommand = useCallback(
     (raw: string) => {
@@ -182,24 +200,44 @@ export default function PortfolioTerminal() {
     [resetTerminal]
   );
 
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setInput(e.target.value);
+    setCursorPos(e.target.selectionStart ?? e.target.value.length);
+  };
+
+  const syncCursorPos = () => {
+    setTimeout(() => {
+      if (inputRef.current) {
+        setCursorPos(inputRef.current.selectionStart ?? inputRef.current.value.length);
+      }
+    }, 0);
+  };
+
   const onKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
     if (e.key === "Enter") {
       runCommand(input);
       setInput("");
+      setCursorPos(0);
     } else if (e.key === "ArrowUp") {
       e.preventDefault();
       setHistoryIdx((i) => {
         const next = Math.min(i + 1, history.length - 1);
-        setInput(history[next] ?? "");
+        const val = history[next] ?? "";
+        setInput(val);
+        setCursorPos(val.length);
         return next;
       });
     } else if (e.key === "ArrowDown") {
       e.preventDefault();
       setHistoryIdx((i) => {
         const next = Math.max(i - 1, -1);
-        setInput(next === -1 ? "" : (history[next] ?? ""));
+        const val = next === -1 ? "" : (history[next] ?? "");
+        setInput(val);
+        setCursorPos(val.length);
         return next;
       });
+    } else {
+      syncCursorPos();
     }
   };
 
@@ -210,6 +248,10 @@ export default function PortfolioTerminal() {
     error: "#ff6b6b",
     success: "#33E092",
   };
+
+  const beforeCursor = input.slice(0, cursorPos);
+  const atCursor = input.slice(cursorPos, cursorPos + 1);
+  const afterCursor = input.slice(cursorPos + 1);
 
   return (
     <AnimatePresence>
@@ -225,6 +267,21 @@ export default function PortfolioTerminal() {
             padding: "16px",
           }}
         >
+          {/* Keyframe animation for classic blinking terminal block cursor */}
+          <style>{`
+            @keyframes terminalBlink {
+              0%, 49% {
+                opacity: 1;
+              }
+              50%, 100% {
+                opacity: 0;
+              }
+            }
+            .terminal-block-cursor {
+              animation: terminalBlink 1s step-start infinite;
+            }
+          `}</style>
+
           {/* Backdrop */}
           <motion.div
             key="terminal-backdrop"
@@ -260,8 +317,12 @@ export default function PortfolioTerminal() {
               flexDirection: "column",
               fontFamily: "'JetBrains Mono', 'Fira Code', 'Courier New', monospace",
               overflow: "hidden",
+              cursor: "text",
             }}
-            onClick={(e) => e.stopPropagation()}
+            onClick={(e) => {
+              e.stopPropagation();
+              focusInput();
+            }}
           >
             {/* Title bar */}
             <div
@@ -273,7 +334,9 @@ export default function PortfolioTerminal() {
                 borderBottom: "1px solid rgba(51,224,146,0.15)",
                 background: "rgba(51,224,146,0.04)",
                 flexShrink: 0,
+                cursor: "default",
               }}
+              onClick={(e) => e.stopPropagation()}
             >
               <div style={{ display: "flex", gap: 6 }}>
                 {(["#ff5f57", "#ffbd2e", "#28c940"] as const).map((c) => (
@@ -298,6 +361,7 @@ export default function PortfolioTerminal() {
                   color: "rgba(255,255,255,0.45)",
                   fontSize: 12,
                   letterSpacing: "0.08em",
+                  userSelect: "none",
                 }}
               >
                 portfolio — bash
@@ -309,6 +373,7 @@ export default function PortfolioTerminal() {
                   border: "1px solid rgba(255,255,255,0.18)",
                   borderRadius: 4,
                   padding: "1px 5px",
+                  userSelect: "none",
                 }}
               >
                 esc
@@ -325,6 +390,7 @@ export default function PortfolioTerminal() {
                 flexDirection: "column",
                 gap: 2,
               }}
+              onClick={focusInput}
             >
               {lines.map((line) => (
                 <div
@@ -343,38 +409,97 @@ export default function PortfolioTerminal() {
               <div ref={bottomRef} />
             </div>
 
-            {/* Input row */}
+            {/* Interactive Input row with classic retro white block cursor */}
             <div
               style={{
+                position: "relative",
                 display: "flex",
                 alignItems: "center",
-                padding: "10px 18px",
+                padding: "12px 18px",
                 borderTop: "1px solid rgba(51,224,146,0.12)",
                 gap: 8,
                 flexShrink: 0,
+                cursor: "text",
               }}
+              onClick={focusInput}
             >
-              <span style={{ color: "#33E092", fontSize: 13, whiteSpace: "nowrap" }}>
+              <span
+                style={{
+                  color: "#33E092",
+                  fontSize: 13,
+                  fontWeight: 600,
+                  whiteSpace: "nowrap",
+                  userSelect: "none",
+                }}
+              >
                 sahil@portfolio:~$
               </span>
-              <input
-                ref={inputRef}
-                value={input}
-                onChange={(e) => setInput(e.target.value)}
-                onKeyDown={onKeyDown}
-                spellCheck={false}
-                autoComplete="off"
+
+              {/* Display text and blinking white block cursor */}
+              <div
                 style={{
-                  flex: 1,
-                  background: "transparent",
-                  border: "none",
-                  outline: "none",
-                  color: "#e8e8e8",
+                  display: "inline-flex",
+                  alignItems: "center",
                   fontSize: 13,
                   fontFamily: "inherit",
-                  caretColor: "#33E092",
+                  lineHeight: "1.2",
+                  minHeight: "18px",
+                  flex: 1,
+                  pointerEvents: "none",
                 }}
-                placeholder="type a command…"
+              >
+                <span style={{ color: "#e8e8e8", whiteSpace: "pre" }}>{beforeCursor}</span>
+                {atCursor ? (
+                  <span
+                    className="terminal-block-cursor"
+                    style={{
+                      backgroundColor: "#ffffff",
+                      color: "#0a0c10",
+                      display: "inline-block",
+                      lineHeight: "1.2",
+                      fontWeight: 600,
+                    }}
+                  >
+                    {atCursor}
+                  </span>
+                ) : (
+                  <span
+                    className="terminal-block-cursor"
+                    style={{
+                      display: "inline-block",
+                      width: "8.5px",
+                      height: "15px",
+                      backgroundColor: "#ffffff",
+                      verticalAlign: "middle",
+                    }}
+                  />
+                )}
+                <span style={{ color: "#e8e8e8", whiteSpace: "pre" }}>{afterCursor}</span>
+              </div>
+
+              {/* Real hidden input capturing keystrokes */}
+              <input
+                ref={inputRef}
+                autoFocus
+                value={input}
+                onChange={handleInputChange}
+                onKeyDown={onKeyDown}
+                onKeyUp={syncCursorPos}
+                onClick={syncCursorPos}
+                onSelect={syncCursorPos}
+                spellCheck={false}
+                autoComplete="off"
+                autoCapitalize="off"
+                style={{
+                  position: "absolute",
+                  inset: 0,
+                  opacity: 0,
+                  width: "100%",
+                  height: "100%",
+                  cursor: "text",
+                  caretColor: "transparent",
+                  fontSize: 13,
+                }}
               />
             </div>
           </motion.div>
