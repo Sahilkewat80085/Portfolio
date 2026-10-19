@@ -20,10 +20,7 @@ const mkLine = (type: LineType, content: string): TerminalLine => ({
 });
 
 const BANNER = [
-  "┌──────────────────────────────────────────────────────┐",
-  "│          SAHIL KEWAT — PORTFOLIO CLI v1.0            │",
-  "│        Type  help  to see available commands         │",
-  "└──────────────────────────────────────────────────────┘",
+  "Type 'help' to see available commands.",
 ];
 
 const COMMANDS: Record<string, () => string[]> = {
