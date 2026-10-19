@@ -285,31 +285,55 @@ export default function PortfolioTerminal() {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            transition={{ duration: 0.2 }}
+            transition={{ duration: 0.24, ease: [0.32, 0.72, 0, 1] }}
             onClick={() => setOpen(false)}
             style={{
               position: "absolute",
               inset: 0,
-              background: "rgba(0,0,0,0.65)",
-              backdropFilter: "blur(6px)",
+              background: "rgba(0, 0, 0, 0.7)",
+              backdropFilter: "blur(12px)",
+              WebkitBackdropFilter: "blur(12px)",
             }}
           />
 
-          {/* Centered Modal Window */}
+          {/* Centered Modal Window with Apple-style Fluid Spring Zoom Open & Close */}
           <motion.div
             key="terminal-window"
-            initial={{ opacity: 0, y: 25, scale: 0.95 }}
-            animate={{ opacity: 1, y: 0, scale: 1 }}
-            exit={{ opacity: 0, y: 25, scale: 0.95 }}
-            transition={{ duration: 0.2, ease: [0.16, 1, 0.3, 1] }}
+            variants={{
+              hidden: {
+                opacity: 0,
+                scale: 0.86,
+                filter: "blur(10px)",
+                transition: {
+                  duration: 0.2,
+                  ease: [0.32, 0.72, 0, 1],
+                },
+              },
+              visible: {
+                opacity: 1,
+                scale: 1,
+                filter: "blur(0px)",
+                transition: {
+                  type: "spring",
+                  stiffness: 380,
+                  damping: 26,
+                  mass: 0.7,
+                },
+              },
+            }}
+            initial="hidden"
+            animate="visible"
+            exit="hidden"
             style={{
               position: "relative",
               width: "min(760px, 92vw)",
               height: "min(500px, 80vh)",
-              background: "rgba(10, 12, 16, 0.96)",
-              border: "1px solid rgba(51, 224, 146, 0.35)",
-              borderRadius: 12,
-              boxShadow: "0 0 0 1px rgba(51,224,146,0.1), 0 25px 60px rgba(0,0,0,0.75)",
+              background: "rgba(0, 0, 0, 0.92)",
+              backdropFilter: "blur(24px)",
+              WebkitBackdropFilter: "blur(24px)",
+              border: "1px solid rgba(255, 255, 255, 0.18)",
+              borderRadius: 14,
+              boxShadow: "inset 0 1px 1px 0 rgba(255, 255, 255, 0.25), inset 0 0 24px rgba(255, 255, 255, 0.03), 0 0 0 1px rgba(255, 255, 255, 0.06), 0 30px 70px rgba(0, 0, 0, 0.92), 0 0 40px rgba(51, 224, 146, 0.14)",
               display: "flex",
               flexDirection: "column",
               fontFamily: "'JetBrains Mono', 'Fira Code', 'Courier New', monospace",
@@ -328,8 +352,10 @@ export default function PortfolioTerminal() {
                 alignItems: "center",
                 gap: 8,
                 padding: "10px 16px",
-                borderBottom: "1px solid rgba(51,224,146,0.15)",
-                background: "rgba(51,224,146,0.04)",
+                borderBottom: "1px solid rgba(255, 255, 255, 0.1)",
+                background: "linear-gradient(180deg, rgba(255, 255, 255, 0.08) 0%, rgba(255, 255, 255, 0.02) 100%)",
+                backdropFilter: "blur(12px)",
+                WebkitBackdropFilter: "blur(12px)",
                 flexShrink: 0,
                 cursor: "default",
               }}
@@ -413,7 +439,8 @@ export default function PortfolioTerminal() {
                 display: "flex",
                 alignItems: "center",
                 padding: "12px 18px",
-                borderTop: "1px solid rgba(51,224,146,0.12)",
+                borderTop: "1px solid rgba(255, 255, 255, 0.1)",
+                background: "linear-gradient(180deg, rgba(255, 255, 255, 0.01) 0%, rgba(255, 255, 255, 0.04) 100%)",
                 gap: 8,
                 flexShrink: 0,
                 cursor: "text",
