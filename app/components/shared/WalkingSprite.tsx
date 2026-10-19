@@ -67,6 +67,8 @@ const MESSAGES = [
   "Are you a CSS file? Because you've got style.",
   "My heart skips a frame whenever you scroll by.",
   "Is your Wi-Fi signal strong? Because I'm feeling a connection.",
+  "Psst... press the backtick key to access the secret terminal!",
+  "There is a hidden CLI terminal on this portfolio. Can you find it?",
 ];
 
 const WalkingSprite = () => {
@@ -319,3 +321,4 @@ const WalkingSprite = () => {
 };
 
 export default WalkingSprite;
+

@@ -3,6 +3,7 @@
 import Navbar from "./Navbar";
 import Footer from "./Footer";
 import WalkingSprite from "../shared/WalkingSprite";
+import PortfolioTerminal from "../shared/PortfolioTerminal";
 
 export default function AppShell({
   children,
@@ -14,6 +15,7 @@ export default function AppShell({
       <Navbar />
       {children}
       <WalkingSprite />
+      <PortfolioTerminal />
       <Footer />
     </>
   );
