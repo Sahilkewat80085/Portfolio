@@ -302,22 +302,24 @@ export default function PortfolioTerminal() {
             variants={{
               hidden: {
                 opacity: 0,
-                scale: 0.86,
-                filter: "blur(10px)",
+                scaleY: 0.04,
+                scaleX: 0.92,
+                filter: "blur(6px)",
                 transition: {
-                  duration: 0.2,
+                  duration: 0.22,
                   ease: [0.32, 0.72, 0, 1],
                 },
               },
               visible: {
                 opacity: 1,
-                scale: 1,
+                scaleY: 1,
+                scaleX: 1,
                 filter: "blur(0px)",
                 transition: {
                   type: "spring",
-                  stiffness: 380,
-                  damping: 26,
-                  mass: 0.7,
+                  stiffness: 420,
+                  damping: 25,
+                  mass: 0.6,
                 },
               },
             }}
@@ -326,6 +328,7 @@ export default function PortfolioTerminal() {
             exit="hidden"
             style={{
               position: "relative",
+              transformOrigin: "center center",
               width: "min(760px, 92vw)",
               height: "min(500px, 80vh)",
               background: "rgba(0, 0, 0, 0.92)",
